@@ -1,0 +1,129 @@
+<models>
+
+	<tower type="sniper">
+		<upgrade skin_index="0" buy_cost="10" sell_cost="8" demage="8" update_time="10" shoot_time="30" bullet_speed="6" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="0" buy_cost="20" sell_cost="24" demage="20" update_time="20" shoot_time="30" bullet_speed="6" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="0" buy_cost="40" sell_cost="48" demage="50" update_time="40" shoot_time="30" bullet_speed="6" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="0" buy_cost="70" sell_cost="96" demage="150" update_time="80" shoot_time="30" bullet_speed="6" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=12 >000111111000001111111100011111111110111111111111111111111111111111111111111111111111111111111111111111111111011111111110001111111100000111111000</demage_area>
+		</upgrade>
+		<upgrade skin_index="0" buy_cost="170" sell_cost="240" demage="300" update_time="160" shoot_time="30" bullet_speed="7" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=16 >0000111111110000000111111111100000111111111111000111111111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110111111111111110001111111111110000011111111110000000111111110000</demage_area>
+		</upgrade>
+	</tower> 	
+	<tower type="rocket">
+		<upgrade skin_index="1" buy_cost="20" sell_cost="14" demage="10" update_time="10" shoot_time="70" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="1" buy_cost="40" sell_cost="50" demage="30" update_time="20" shoot_time="70" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=12 >000111111000001111111100011111111110111111111111111111111111111111111111111111111111111111111111111111111111011111111110001111111100000111111000</demage_area>
+		</upgrade>
+		<upgrade skin_index="1" buy_cost="80" sell_cost="100" demage="80" update_time="40" shoot_time="70" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=14 >0000111111000000011111111000001111111111000111111111111011111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111110001111111111000001111111100000001111110000</demage_area>
+		</upgrade>
+		<upgrade skin_index="1" buy_cost="160" sell_cost="220" demage="200" update_time="80" shoot_time="70" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=16 >0000111111110000000111111111100000111111111111000111111111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110111111111111110001111111111110000011111111110000000111111110000</demage_area>
+		</upgrade>
+		<upgrade skin_index="1" buy_cost="320" sell_cost="400" demage="400" update_time="160" shoot_time="70" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=18 >000011111111110000000111111111111000001111111111111100011111111111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111011111111111111110001111111111111100000111111111111000000011111111110000</demage_area>
+		</upgrade>
+	</tower> 	
+	<tower type="range">
+		<upgrade skin_index="2" buy_cost="100" sell_cost="80" demage="2" update_time="10" shoot_time="70" bullet_speed="8" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="2" buy_cost="150" sell_cost="150" demage="4" update_time="20" shoot_time="70" bullet_speed="8" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="2" buy_cost="200" sell_cost="300" demage="10" update_time="40" shoot_time="70" bullet_speed="8" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="2" buy_cost="300" sell_cost="400" demage="25" update_time="80" shoot_time="70" bullet_speed="8" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="2" buy_cost="400" sell_cost="600" demage="50" update_time="160" shoot_time="70" bullet_speed="12" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+	</tower>
+
+	<tower type="slowdown">
+		<upgrade skin_index="3" buy_cost="50" sell_cost="40" demage="5" update_time="10" shoot_time="60" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="3" buy_cost="100" sell_cost="120" demage="10" update_time="20" shoot_time="50" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="3" buy_cost="150" sell_cost="200" demage="20" update_time="40" shoot_time="40" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="3" buy_cost="150" sell_cost="300" demage="40" update_time="80" shoot_time="30" bullet_speed="10" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=12 >000111111000001111111100011111111110111111111111111111111111111111111111111111111111111111111111111111111111011111111110001111111100000111111000</demage_area>
+		</upgrade>
+		<upgrade skin_index="3" buy_cost="150" sell_cost="400" demage="80" update_time="160" shoot_time="10" bullet_speed="12" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=14 >0000111111000000011111111000001111111111000111111111111011111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111110001111111111000001111111100000001111110000</demage_area>
+		</upgrade>
+	</tower> 
+
+	<tower type="air">
+		<upgrade skin_index="4" buy_cost="50" sell_cost="40" demage="20" update_time="10" shoot_time="20" bullet_speed="12" on_shoot_bullet_count="5" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="4" buy_cost="100" sell_cost="120" demage="60" update_time="20" shoot_time="20" bullet_speed="12" on_shoot_bullet_count="7" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="4" buy_cost="150" sell_cost="200" demage="180" update_time="40" shoot_time="20" bullet_speed="12" on_shoot_bullet_count="10" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="4" buy_cost="200" sell_cost="350" demage="360" update_time="80" shoot_time="20" bullet_speed="12" on_shoot_bullet_count="12" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="4" buy_cost="400" sell_cost="800" demage="700" update_time="160" shoot_time="20" bullet_speed="12" on_shoot_bullet_count="15" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=12 >000111111000001111111100011111111110111111111111111111111111111111111111111111111111111111111111111111111111011111111110001111111100000111111000</demage_area>
+		</upgrade>
+	</tower> 
+	
+	<tower type=" earthquake">
+		<upgrade skin_index="5" buy_cost="100" sell_cost="80" demage="70" update_time="10" shoot_time="70" bullet_speed="1" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="5" buy_cost="120" sell_cost="100" demage="140" update_time="20" shoot_time="70" bullet_speed="3" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="5" buy_cost="240" sell_cost="300" demage="280" update_time="40" shoot_time="70" bullet_speed="3" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="5" buy_cost="300" sell_cost="500" demage="560" update_time="80" shoot_time="70" bullet_speed="6" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="5" buy_cost="400" sell_cost="500" demage="1120" update_time="160" shoot_time="70" bullet_speed="6" on_shoot_bullet_count="1" bullet_skin_index="0" bullet_effect="0">74
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		
+	</tower> 
+	
+	<tower type=" radar">
+		<upgrade skin_index="6" buy_cost="50" sell_cost="40" demage="0" update_time="10" shoot_time="27" bullet_speed="0" on_shoot_bullet_count="0" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=6 >011110111111111111111111111111011110</demage_area>
+		</upgrade>
+		<upgrade skin_index="6" buy_cost="60" sell_cost="80" demage="0" update_time="20" shoot_time="27" bullet_speed="0" on_shoot_bullet_count="0" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=8 >0011110001111110111111111111111111111111111111110111111000111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="6" buy_cost="70" sell_cost="160" demage="0" update_time="40" shoot_time="27" bullet_speed="0" on_shoot_bullet_count="0" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=10 >0011111100011111111011111111111111111111111111111111111111111111111111111111111101111111100011111100</demage_area>
+		</upgrade>
+		<upgrade skin_index="6" buy_cost="80" sell_cost="260" demage="0" update_time="80" shoot_time="27" bullet_speed="0" on_shoot_bullet_count="0" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=12 >000111111000001111111100011111111110111111111111111111111111111111111111111111111111111111111111111111111111011111111110001111111100000111111000</demage_area>
+		</upgrade>
+		<upgrade skin_index="6" buy_cost="100" sell_cost="260" demage="0" update_time="160" shoot_time="27" bullet_speed="0" on_shoot_bullet_count="0" bullet_skin_index="0" bullet_effect="0">
+			<demage_area row_count=14 >0000111111000000011111111000001111111111000111111111111011111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111110001111111111000001111111100000001111110000</demage_area>
+		</upgrade>
+	</tower> 
+ 	
+	
+</models>	 
