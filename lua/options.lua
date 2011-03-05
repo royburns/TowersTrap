@@ -18,13 +18,13 @@ function Options.create()
 end
 
 function Options:draw()
-
 	
 	love.graphics.draw(graphics["logo"], love.graphics.getWidth( )/2, love.graphics.getHeight( ) /2)
 	
 	love.graphics.setColor(color["text"])
 	love.graphics.setFont(font["large"])
-	love.graphics.draw("Audio:", 60, 300)
+	--love.graphics.draw("Audio:", 60, 300)
+	love.graphics.print("Audio:", 60, 300)
 	--love.graphics.draw("Level:", 60, 375)
 	
 	love.graphics.setColor(color["main"])

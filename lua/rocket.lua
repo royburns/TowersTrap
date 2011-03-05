@@ -31,7 +31,7 @@ function Rocket:draw()
 	love.graphics.setFont(font["large"])
 	if self.hover then love.graphics.setColor(color["main"])
 	else love.graphics.setColor(color["menu_text"]) end
-	love.graphics.draw(self.text, self.x, self.y)
+	love.graphics.print(self.text, self.x, self.y)
 	
 end
 

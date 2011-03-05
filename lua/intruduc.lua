@@ -26,9 +26,9 @@ function Instructions:draw()
 	The rules are simple - no one intruder should exit from you back door. You have limit of 50 lives (omitted intruders), and be careful that you can't get them back. There is 8 different species of intruders and everyone of them has special abilities and power. To stop the intrusive fellows to pass by you have 7 different kinds of towers with various ways to affect the intruders and destroy them. However you should arrange them in the most appropriate way to increase their path and meantime to damage them most. More details about the intruders are explained bellow. Towers Trap has 3 difficulty levels, plus one experimental level, where you can test different strategies without warring about the price of the towers
 ]]
 	love.graphics.setColor(color["menu_border"])
-	love.graphics.drawf(intruducStr, 101, 31, love.graphics.getWidth( )-200, love.align_center)
+	love.graphics.printf(intruducStr, 101, 31, love.graphics.getWidth( )-200, love.align_center)
 	love.graphics.setColor(color["menu_text"])
-	love.graphics.drawf(intruducStr, 100, 30, love.graphics.getWidth( )-200, love.align_center)
+	love.graphics.printf(intruducStr, 100, 30, love.graphics.getWidth( )-200, love.align_center)
 	
 	for n,b in pairs(self.button) do
 		b:draw()

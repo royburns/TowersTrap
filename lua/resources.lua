@@ -8,100 +8,113 @@
 -- Handles buttons and such.
 -----------------------
 
+
 -- Resources
-color =	 {	background = love.graphics.newColor(240,243,247),
-      main = love.graphics.newColor(63,193,245),
-      menu_bg = love.graphics.newColor(130,135,121,150),
-      menu_border = love.graphics.newColor(136,143,134,200),
-      text = love.graphics.newColor(76,77,78),
-      menu_text = love.graphics.newColor(0,0,0),
-      obj_selected = love.graphics.newColor(254,154,0),
-      grid_hover = love.graphics.newColor(255,155,0),
-      grid_open = love.graphics.newColor(248,248,100,200),
-      grid_close = love.graphics.newColor(229,127,211,200),
-      grid = love.graphics.newColor(255,255,255,100),
-      white = love.graphics.newColor(255,255,255),
-      yellow = love.graphics.newColor(255,255,0),
-      overlay = love.graphics.newColor(255,255,255,100),
-      green_ol = love.graphics.newColor(0,255,0,25),
-      shadow = love.graphics.newColor(0,0,0,50),
-      black  = love.graphics.newColor(0,0,0),
-	  green = love.graphics.newColor(0,255,0),
-	  green1 = love.graphics.newColor(0,230,160),
-	  blood = love.graphics.newColor(230,0,160),
-	  gray = love.graphics.newColor(128,128,128)
-	  }
-font = {	default = love.graphics.newFont(love.default_font, 24),
-      impact = love.graphics.newFont("resources/impact.ttf", 32),
-      impact_0 = love.graphics.newFont("resources/impact.ttf", 30),
-      impact_1 = love.graphics.newFont("resources/impact.ttf", 14), 
-      impact_2 = love.graphics.newFont("resources/impact.ttf", 12),
-      large = love.graphics.newFont(love.default_font, 32),
-      huge = love.graphics.newFont(love.default_font, 72),
-      small = love.graphics.newFont(love.default_font, 22),
-      medium = love.graphics.newFont(love.default_font, 14),
-      intruduc = love.graphics.newFont(love.default_font, 12),
-	  tiny = love.graphics.newFont(love.default_font, 9)}
-graphics = {battle_bg = love.graphics.newImage("img/bg.png"),
-      logo = love.graphics.newImage("img/current_logo.png"),
-      weapons = love.graphics.newImage("img/weapons.png"),
-      fmas = love.graphics.newImage("img/fmas.png"),
-      set = love.graphics.newImage("img/set.png"),
-      notset = love.graphics.newImage("img/notset.png"),
-      bh_border = love.graphics.newImage("img/bh_border.png"),
-      bh_border_ice = love.graphics.newImage("img/bh_border_ice.png"),
-      rocket_fire = love.graphics.newImage("img/rocket_fire.png"),
-      range_fire = love.graphics.newImage("img/range_fire.png"),
-      sa12_fire = love.graphics.newImage("img/sa12.png"),
-      canon_fire = love.graphics.newImage("img/canon_fire.png"),
-      shock_fire = love.graphics.newImage("img/star.png"),
-      star_circle = love.graphics.newImage("img/star_circle.png"),
-      power = love.graphics.newImage("img/power.png"),
-      update = love.graphics.newImage("img/update.png"),
-      coast = love.graphics.newImage("img/coast.png"),
-      
-      creature = {
-            love.graphics.newImage("img/creature0.png"),
-            love.graphics.newImage("img/creature1.png"),
-            love.graphics.newImage("img/creature2.png"),
-            love.graphics.newImage("img/creature3.png"),
-            love.graphics.newImage("img/creature4.png"),
-            love.graphics.newImage("img/creature5.png"),
-            love.graphics.newImage("img/creature6.png"),
-            love.graphics.newImage("img/creature7.png")
-            },
-      blockhous = {
-            love.graphics.newImage("img/sniper.png"),
-            love.graphics.newImage("img/rocket.png"),
-            love.graphics.newImage("img/cannon.png"),
-            love.graphics.newImage("img/slowdown.png"),
-            love.graphics.newImage("img/air_tower.png"),
-            love.graphics.newImage("img/earthquake_tower.png"),
-            love.graphics.newImage("img/radar.png")
+color =	 {
+	---[[
+	background = love.graphics.newColor(240,243,247),
+	main = love.graphics.newColor(63,193,245),
+	menu_bg = love.graphics.newColor(130,135,121,150),
+	menu_border = love.graphics.newColor(136,143,134,200),
+	text = love.graphics.newColor(76,77,78),
+	menu_text = love.graphics.newColor(0,0,0),
+	obj_selected = love.graphics.newColor(254,154,0),
+	grid_hover = love.graphics.newColor(255,155,0),
+	grid_open = love.graphics.newColor(248,248,100,200),
+	grid_close = love.graphics.newColor(229,127,211,200),
+	grid = love.graphics.newColor(255,255,255,100),
+	white = love.graphics.newColor(255,255,255),
+	yellow = love.graphics.newColor(255,255,0),
+	overlay = love.graphics.newColor(255,255,255,100),
+	green_ol = love.graphics.newColor(0,255,0,25),
+	shadow = love.graphics.newColor(0,0,0,50),
+	black  = love.graphics.newColor(0,0,0),
+	green = love.graphics.newColor(0,255,0),
+	green1 = love.graphics.newColor(0,230,160),
+	blood = love.graphics.newColor(230,0,160),
+	gray = love.graphics.newColor(128,128,128)
+	---]]
+}
 
-            }
-      }
+font = {
+	--default = love.graphics.newFont(love.default_font, 24),
+	default = love.graphics.newFont(24),
+	impact = love.graphics.newFont("resources/impact.ttf", 32),
+	impact_0 = love.graphics.newFont("resources/impact.ttf", 30),
+	impact_1 = love.graphics.newFont("resources/impact.ttf", 14), 
+	impact_2 = love.graphics.newFont("resources/impact.ttf", 12),
+	large = love.graphics.newFont(32),
+	huge = love.graphics.newFont(72),
+	small = love.graphics.newFont(22),
+	medium = love.graphics.newFont(14),
+	intruduc = love.graphics.newFont(12),
+	tiny = love.graphics.newFont(9)
+}
 
-music =	{	menu = love.audio.newMusic("sound/menu_bg.mod"),
-      game = love.audio.newMusic("sound/game_bg.mod") }
-sound =	{	click = love.audio.newSound("sound/click.ogg"),
-      shush = love.audio.newSound("sound/shh.ogg"),
-      pling = love.audio.newSound("sound/pling.ogg"),
-      create_tower = love.audio.newSound("sound/create_tower.wav"),
-      sniper_fire = love.audio.newSound("sound/sniper_fire.wav"),
-      rocket_fire = love.audio.newSound("sound/rocket_fire.wav"),
-      earthquake_fire = love.audio.newSound("sound/earthquake_fire.wav"),
-	  air_fire = love.audio.newSound("sound/air_fire.wav"),
-	  radar_fire = love.audio.newSound("sound/radar_fire.wav"),
-	  range_fire = love.audio.newSound("sound/range_fire.wav"),
-	  slowdown_fire = love.audio.newSound("sound/slowdown_fire.wav"),
-	  upgrade_tower = love.audio.newSound("sound/upgrade_tower.wav"),
-	  sell_tower = love.audio.newSound("sound/sell_tower.wav"),
-      next_level = love.audio.newSound("sound/next_level.wav"),
-      creature_die = love.audio.newSound("sound/creature_die.wav"),
-      creature_rich_dest = love.audio.newSound("sound/creature_rich_dest.WAV")
+graphics = {
+	battle_bg = love.graphics.newImage("img/bg.png"),
+	logo = love.graphics.newImage("img/current_logo.png"),
+	weapons = love.graphics.newImage("img/weapons.png"),
+	fmas = love.graphics.newImage("img/fmas.png"),
+	set = love.graphics.newImage("img/set.png"),
+	notset = love.graphics.newImage("img/notset.png"),
+	bh_border = love.graphics.newImage("img/bh_border.png"),
+	bh_border_ice = love.graphics.newImage("img/bh_border_ice.png"),
+	rocket_fire = love.graphics.newImage("img/rocket_fire.png"),
+	range_fire = love.graphics.newImage("img/range_fire.png"),
+	sa12_fire = love.graphics.newImage("img/sa12.png"),
+	canon_fire = love.graphics.newImage("img/canon_fire.png"),
+	shock_fire = love.graphics.newImage("img/star.png"),
+	star_circle = love.graphics.newImage("img/star_circle.png"),
+	power = love.graphics.newImage("img/power.png"),
+	update = love.graphics.newImage("img/update.png"),
+	coast = love.graphics.newImage("img/coast.png"),
       
-    }
+	creature = {
+		love.graphics.newImage("img/creature0.png"),
+		love.graphics.newImage("img/creature1.png"),
+		love.graphics.newImage("img/creature2.png"),
+		love.graphics.newImage("img/creature3.png"),
+		love.graphics.newImage("img/creature4.png"),
+		love.graphics.newImage("img/creature5.png"),
+		love.graphics.newImage("img/creature6.png"),
+		love.graphics.newImage("img/creature7.png")
+	},
+	blockhous = {
+		love.graphics.newImage("img/sniper.png"),
+		love.graphics.newImage("img/rocket.png"),
+		love.graphics.newImage("img/cannon.png"),
+		love.graphics.newImage("img/slowdown.png"),
+		love.graphics.newImage("img/air_tower.png"),
+		love.graphics.newImage("img/earthquake_tower.png"),
+		love.graphics.newImage("img/radar.png")
+	}
+}
+
+music =	{
+	menu = love.audio.newMusic("sound/menu_bg.mod"),
+	game = love.audio.newMusic("sound/game_bg.mod") 
+}
+
+sound =	{
+	click = love.audio.newSound("sound/click.ogg"),
+	shush = love.audio.newSound("sound/shh.ogg"),
+	pling = love.audio.newSound("sound/pling.ogg"),
+	create_tower = love.audio.newSound("sound/create_tower.wav"),
+	sniper_fire = love.audio.newSound("sound/sniper_fire.wav"),
+	rocket_fire = love.audio.newSound("sound/rocket_fire.wav"),
+	earthquake_fire = love.audio.newSound("sound/earthquake_fire.wav"),
+	air_fire = love.audio.newSound("sound/air_fire.wav"),
+	radar_fire = love.audio.newSound("sound/radar_fire.wav"),
+	range_fire = love.audio.newSound("sound/range_fire.wav"),
+	slowdown_fire = love.audio.newSound("sound/slowdown_fire.wav"),
+	upgrade_tower = love.audio.newSound("sound/upgrade_tower.wav"),
+	sell_tower = love.audio.newSound("sound/sell_tower.wav"),
+	next_level = love.audio.newSound("sound/next_level.wav"),
+	creature_die = love.audio.newSound("sound/creature_die.wav"),
+	creature_rich_dest = love.audio.newSound("sound/creature_rich_dest.wav")
+}
+
 tower_upgrade =
     { --snipper =
       {

@@ -26,48 +26,49 @@ function Weapons.create(x,y)
 	temp._x = x - 40*7 /2
 	temp._y = y - (40 /2)
 	return temp
-	
 end
+
 function Weapons:getSelected()
 	return self.selected;
 end
+
 function Weapons:draw()
 	if not self.hover then
 		love.graphics.setColor(color["menu_bg"])
 		love.graphics.setLine(1)
 		love.graphics.rectangle( love.draw_fill, self._x, self._y , self.width, self.height) 
 		if(debug) then
-			love.graphics.draw("weapons leave", 100, 120) 
+			love.graphics.print("weapons leave", 100, 120) 
 		end
 	else
 		if(debug) then
 		love.graphics.setColor(color["menu_bg"])
-		love.graphics.draw("weapons hover", 100, 120) 
+		love.graphics.print("weapons hover", 100, 120) 
 		end
 	end
 	love.graphics.draw(graphics["weapons"], self.x , self.y)
 	if(debug) then
 		love.graphics.setColor(color["menu_bg"])
-		love.graphics.draw("weapons selected: " .. self.selected, 100, 100) 
+		love.graphics.print("weapons selected: " .. self.selected, 100, 100) 
 	end
 	if self.selected > 0 then
 		love.graphics.setColor(color["white"])
 		--love.graphics.setFont(font["large"])
 		love.graphics.setFont(font["impact"])
 		if self.selected == 1 then
-			love.graphics.draw("SNIPER",197,589)
+			love.graphics.print("SNIPER",197,589)
 		elseif self.selected == 2 then
-			love.graphics.draw("ROCKET LUNCHER",197,589)
+			love.graphics.print("ROCKET LUNCHER",197,589)
 		elseif self.selected == 3 then
-			love.graphics.draw("CANNON",197,589)
+			love.graphics.print("CANNON",197,589)
 		elseif self.selected == 4 then
-			love.graphics.draw("SHOCK",197,589)
+			love.graphics.print("SHOCK",197,589)
 		elseif self.selected == 5 then
-			love.graphics.draw("AIR",197,589)
+			love.graphics.print("AIR",197,589)
 		elseif self.selected == 6 then
-			love.graphics.draw("EARTHQUAKE",197,589)
+			love.graphics.print("EARTHQUAKE",197,589)
 		elseif self.selected == 7 then
-			love.graphics.draw("RADAR",197,589)
+			love.graphics.print("RADAR",197,589)
 		end
 		
 		love.graphics.setColor(color["obj_selected"])
@@ -89,7 +90,6 @@ function Weapons:update(dt)
 		and y < self._y + self.height then
 		self.hover = true
 	end
-	
 end
 
 function Weapons:mousepressed(x, y, button)
@@ -107,7 +107,6 @@ function Weapons:mousepressed(x, y, button)
 	end
 	
 	return false
-	
 end
 
 function Weapons:unSelected()

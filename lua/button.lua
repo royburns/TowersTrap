@@ -20,18 +20,26 @@ function Button.create(text,x,y)
 	temp.text = text -- the text in the button
 	temp.width = font["large"]:getWidth(text)
 	temp.height = font["large"]:getHeight()
-	temp.x = x - (temp.width / 2)
-	temp.y = y
+	temp.x = x - (temp.width/2)
+	temp.y = y + (temp.height/2)
 	return temp
-	
 end
 
 function Button:draw()
 	
 	love.graphics.setFont(font["large"])
-	if self.hover then love.graphics.setColor(color["main"])
-	else love.graphics.setColor(color["menu_text"]) end
-	love.graphics.draw(self.text, self.x, self.y)
+	if self.hover then 
+		love.graphics.setColor(color["main"])
+	else 
+		love.graphics.setColor(color["menu_text"]) 
+	end
+	
+	--self.framebuffer = love.graphics.newFramebuffer() --cant new here, because "draw" call every frame
+	--self.font = love.graphics.newFont(14)
+	
+	print(self.text)
+	--love.graphics.draw(self.text, self.x, self.y)
+	love.graphics.print(self.text, self.x, self.y - self.height)
 	
 end
 
@@ -48,7 +56,6 @@ function Button:update(dt)
 		and y < self.y then
 		self.hover = true
 	end
-	
 end
 
 function Button:mousepressed(x, y, button)
@@ -59,7 +66,5 @@ function Button:mousepressed(x, y, button)
 		end
 		return true
 	end
-	
 	return false
-	
 end

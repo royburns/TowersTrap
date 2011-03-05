@@ -8,6 +8,8 @@
 -- States used.
 -----------------------
 
+love.filesystem.require = require
+
 love.filesystem.require("lua/vardump.lua")
 love.filesystem.require("lua/menu.lua")
 love.filesystem.require("lua/intruduc.lua")

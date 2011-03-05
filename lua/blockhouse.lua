@@ -102,15 +102,15 @@ function Blockhouse:draw()
 	s ="unsel"
 	end
 
-
 	-- »­µï±¤ĞÅÏ¢ 
 	if self.hover and debug  then
 		love.graphics.setFont(font["tiny"])
  		love.graphics.setColor(color["text"])
-		love.graphics.draw(string.format("x=%d,y=%d,w=%d,h=%d,s=%s,m=%s",self._x,self._y,self.width,self.height,s,h),self._x,self._y)
+		--love.graphics.draw(string.format("x=%d,y=%d,w=%d,h=%d,s=%s,m=%s",self._x,self._y,self.width,self.height,s,h),self._x,self._y)
+		love.graphics.print(string.format("x=%d,y=%d,w=%d,h=%d,s=%s,m=%s",self._x,self._y,self.width,self.height,s,h),self._x,self._y)
 	end
-
 end
+
 function Blockhouse:drawselector()
 
         local weapon = self.weapon
@@ -135,7 +135,8 @@ function Blockhouse:drawselector()
 			love.graphics.setColor(color["yellow"])
 			love.graphics.setFont(font["tiny"])
 			local textwidth = font["tiny"]:getWidth(buy_cost)
-			love.graphics.draw( buy_cost, self.x - textwidth /2, self._y - textheight / 2 )
+			--love.graphics.draw( buy_cost, self.x - textwidth /2, self._y - textheight / 2 )
+			love.graphics.print( buy_cost, self.x - textwidth /2, self._y - textheight / 2 )
 		end
 
 		local sell_cost = tower_upgrade[self.weapon][self.level].sell_cost
@@ -144,10 +145,10 @@ function Blockhouse:drawselector()
 		love.graphics.setColor(color["yellow"])
 		love.graphics.setFont(font["tiny"])
 		local textwidth = font["tiny"]:getWidth(sell_cost)
-		love.graphics.draw( sell_cost, self.x - textwidth /2, self.y + 17 + 17 - textheight / 2 )
-
-
+		--love.graphics.draw( sell_cost, self.x - textwidth /2, self.y + 17 + 17 - textheight / 2 )
+		love.graphics.print( sell_cost, self.x - textwidth /2, self.y + 17 + 17 - textheight / 2 )
 end
+
 function Blockhouse:update(dt)
 	
 	if(self.ice_time>0) then

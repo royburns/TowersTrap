@@ -1,7 +1,7 @@
 
-
 -- Game State
 -- Where the actual playing takes place
+
 Game = {}
 Game.__index = Game
 
@@ -23,7 +23,6 @@ function Game.create()
 	
 	math.randomseed(os.time()) -- randomize (for good measure)
 
-	
 	--[[
   	地图表
 	]]
@@ -61,9 +60,7 @@ function Game.create()
 			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
 			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1
 			}
-	
 
-	
 	for i = 0, grid_col * grid_row - 1 do
 		if temp.maps[i+1] <= 0 then
 		   	Map[i].iCanPass = true
@@ -171,7 +168,6 @@ function Game.create()
 	temp.blockhouses = {} -- 碉堡
 	temp.hints = {} --提示
 	temp.gselectedBlockhouse = nil;
-
 	
 	temp.enemys = {} --敌人
 	temp.ballets = {} -- 子弹 
@@ -255,20 +251,18 @@ function Game.create()
 					quit = Button.create("Quit", 300, 400) }
 	temp.weapons = Weapons.create(335,617)
 	return temp
-	
 end
-
 
 function Game:getSelectWepons()
 	return self.weapons:getSelected()
 end
-function Game:draw()
-	
-	--draw 背景
-	love.graphics.draw(graphics["battle_bg"], 480/2, 640/2)
-	
 
-    
+function Game:draw()
+	--draw 背景
+	--love.graphics.draw(graphics["battle_bg"], 480/2, 640/2)
+	--love.graphics.draw(graphics["battle_bg"], love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+	love.graphics.draw(graphics["battle_bg"])
+	
 	-- Draw the current FPS.
 	if(time_UpdateCapiton <=0) then
     	love.graphics.setCaption("Towers Trap - [FPS: " .. love.timer.getFPS() .."]")
@@ -277,27 +271,30 @@ function Game:draw()
 	if(debug) then	
 		love.graphics.setFont(font["tiny"])
 		love.graphics.setColor(color["text"])	
-		love.graphics.draw("mousepoint(x: " .. self.mousepointer.x .. ",y:" .. self.mousepointer.y,100, 180)
-		love.graphics.draw(string.format("gridpoint(x:%d,y:%d-%d)",self.gridpointer.x,self.gridpointer.y,self.gridpointer.y * grid_col + self.gridpointer.x),100, 200)
+		--love.graphics.draw("mousepoint(x: " .. self.mousepointer.x .. ",y:" .. self.mousepointer.y,100, 180)
+		love.graphics.print("mousepoint(x: " .. self.mousepointer.x .. ",y:" .. self.mousepointer.y,100, 180)
+		--love.graphics.draw(string.format("gridpoint(x:%d,y:%d-%d)",self.gridpointer.x,self.gridpointer.y,self.gridpointer.y * grid_col + self.gridpointer.x),100, 200)
+		love.graphics.print(string.format("gridpoint(x:%d,y:%d-%d)",self.gridpointer.x,self.gridpointer.y,self.gridpointer.y * grid_col + self.gridpointer.x),100, 200)
 	
 		-- draw grid
 		love.graphics.setLine( 1 )
 	    love.graphics.setLineStyle( love.line_smooth )
 		-- unit grid = 17*17
-		
 	
 	    for i = 0, grid_row, 1 do	-- draw h line
 	
 	        love.graphics.setColor(color["grid"])
 			love.graphics.line( battlearea.left, battlearea.top + i*17, battlearea.top + grid_col*17, battlearea.left + i*17 )
 	        love.graphics.setColor(color["menu_text"])
-			love.graphics.draw( i, battlearea.left + 5, battlearea.top + i*17 + 10  )
+			--love.graphics.draw( i, battlearea.left + 5, battlearea.top + i*17 + 10  )
+			love.graphics.print( i, battlearea.left + 5, battlearea.top + i*17 + 10  )
 	    end
 	    for i = 0, grid_col, 1 do -- draw v line
 			love.graphics.setColor(color["grid"])
 			love.graphics.line( battlearea.left + i*17, battlearea.top, battlearea.left + i*17, battlearea.top + 17*grid_row)
 	        love.graphics.setColor(color["menu_text"])
-			love.graphics.draw( i, battlearea.left + i*17 + 5, battlearea.top + 10  )
+			--love.graphics.draw( i, battlearea.left + i*17 + 5, battlearea.top + 10  )
+			love.graphics.print( i, battlearea.left + i*17 + 5, battlearea.top + 10  )
 	    end  
 	end
 	local selectWeapon = self:getSelectWepons()
@@ -307,8 +304,7 @@ function Game:draw()
 		local gy = self.gridpointer.y
 		local cx = battlearea.top + gx *17
 		local cy = battlearea.left + gy * 17
-		local i = self:getSelectWepons()	
-		
+		local i = self:getSelectWepons()
 			
 		love.graphics.setColor(color["grid_hover"])
 		love.graphics.rectangle( love.draw_line, cx, cy , 17*2, 17*2) 
@@ -338,28 +334,34 @@ function Game:draw()
    			love.graphics.setColor(color["text"])
 			love.graphics.setFont(font["tiny"])
 			love.graphics.draw(graphics.power,74,570)
-			love.graphics.draw(damage,94,570)
+			--love.graphics.draw(damage,94,570)
+			love.graphics.print(damage,94,570)
 			love.graphics.draw(graphics.coast,120,570)
-			love.graphics.draw(buy_cost,144,570)
+			--love.graphics.draw(buy_cost,144,570)
+			love.graphics.print(buy_cost,144,570)
 			love.graphics.draw(graphics.update,74,604)
-			love.graphics.draw(shoot_time,94,604)
-
+			--love.graphics.draw(shoot_time,94,604)
+			love.graphics.print(shoot_time,94,604)
 		end
-		
 	end
 	-- draw Time
 	love.graphics.setColor(color["text"])
 	love.graphics.setFont(font["medium"])
-	love.graphics.draw(string.format("%d", self.time), 135, 522)
+	--love.graphics.draw(string.format("%d", self.time), 135, 522)
+	love.graphics.print(string.format("%d", self.time), 135, 522)
 	-- draw health
-	love.graphics.draw(self.health, 350, 522)
+	--love.graphics.draw(self.health, 350, 522)
+	love.graphics.print(self.health, 350, 522)
 	-- draw money
-	love.graphics.draw(self.money,115,50)
+	--love.graphics.draw(self.money,115,50)
+	love.graphics.print(self.money,115,50)
 	-- draw scope
-	love.graphics.draw(self.scope,350,50)
+	--love.graphics.draw(self.scope,350,50)
+	love.graphics.print(self.scope,350,50)
 	-- draw stage level
     if(self.stage < #self.stages) then
-		love.graphics.draw(self.stage,26,576)
+		--love.graphics.draw(self.stage,26,576)
+		love.graphics.print(self.stage,26,576)
 		
 		for i = 1,5 do
 		   local draw_stage = self.stage + i;
@@ -371,17 +373,17 @@ function Game:draw()
 		   local creature_number = self.stages[draw_stage].creature + 1
 
 		   if(draw_stage <= #self.stages) then
-				local oldcolor = love.graphics.getColor()
+				--local oldcolor = love.graphics.getColor()
+				local r, g, b, a = love.graphics.getColor()
 				love.graphics.setColorMode(love.color_modulate)
 				love.graphics.setColor(255, 255, 255, 255 - 150 * i / 5)
 				love.graphics.draw(graphics["creature"][creature_number],14,566 - (i-1) * 30 )
-				love.graphics.setColor(oldcolor)
-				love.graphics.setColorMode(0)
+				--love.graphics.setColor(oldcolor)
+				love.graphics.setColor(r, g, b, a)
+				--love.graphics.setColorMode(0)
+				love.graphics.setColorMode(love.color_replace)
 		   end
-
 		end
-
-		
 	end
 	-- draw weapons
 	self.weapons:draw()
@@ -421,25 +423,26 @@ function Game:draw()
 		love.graphics.setColor(color["text"])
 		love.graphics.setFont(font["tiny"])
 		love.graphics.draw(graphics.power,74,570)
-		love.graphics.draw(damage,94,570)
-
+		--love.graphics.draw(damage,94,570)
+		love.graphics.print(damage,94,570)
 
 		love.graphics.draw(graphics.update,74,604)
-		love.graphics.draw(shoot_time,94,604)
+		--love.graphics.draw(shoot_time,94,604)
+		love.graphics.print(shoot_time,94,604)
 
 		love.graphics.setColor(225,85,32)
 		if(damage_next~=nil) then
-			love.graphics.draw(damage_next,144,570)
+			--love.graphics.draw(damage_next,144,570)
+			love.graphics.print(damage_next,144,570)
 		end
 		if(shoot_time_next ~= nil) then
-		    love.graphics.draw(shoot_time_next,144,604)
+		    --love.graphics.draw(shoot_time_next,144,604)
+			love.graphics.print(shoot_time_next,144,604)
 		end
 	end
 	--画选择的碉堡边框
 	if self.gselectedBlockhouse ~= nil and self.gselectedBlockhouse.live == 1 then
      	self.gselectedBlockhouse:drawselector()
-
-     	
 	end
 
 	if self.win ~= -999 then
@@ -452,10 +455,12 @@ function Game:draw()
 			love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
 			love.graphics.setColor(color["main"])
 			love.graphics.setFont(font["huge"])
-			love.graphics.drawf("CONGRATULATIONS", 0, 150, love.graphics.getWidth(), love.align_center)
+			--love.graphics.drawf("CONGRATULATIONS", 0, 150, love.graphics.getWidth(), love.align_center)
+			love.graphics.printf("CONGRATULATIONS", 0, 150, love.graphics.getWidth(), love.align_center)
 			love.graphics.setColor(color["text"])
 			love.graphics.setFont(font["default"])
-			love.graphics.drawf("You completed a level " .. self.stage .. " ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
+			--love.graphics.drawf("You completed a level " .. self.stage .. " ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
+			love.graphics.printf("You completed a level " .. self.stage .. " ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
 			-- Buttons
 			self.button["new"]:draw()
 			self.button["quit"]:draw()
@@ -465,7 +470,8 @@ function Game:draw()
 		love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
 		love.graphics.setColor(color["main"])
 		love.graphics.setFont(font["huge"])
-		love.graphics.drawf("PAUSED", 0, 150, love.graphics.getWidth(), love.align_center)
+		--love.graphics.drawf("PAUSED", 0, 150, love.graphics.getWidth(), love.align_center)
+		love.graphics.printf("PAUSED", 0, 150, love.graphics.getWidth(), love.align_center)
 		love.graphics.setColor(color["text"])
 		love.graphics.setFont(font["default"])
 		-- Buttons
@@ -478,15 +484,16 @@ function Game:draw()
 		love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
 		love.graphics.setColor(color["blood"])
 		love.graphics.setFont(font["huge"])
-		love.graphics.drawf("YOU LOST", 0, 150, love.graphics.getWidth(), love.align_center)
+		--love.graphics.drawf("YOU LOST", 0, 150, love.graphics.getWidth(), love.align_center)
+		love.graphics.printf("YOU LOST", 0, 150, love.graphics.getWidth(), love.align_center)
 		love.graphics.setColor(color["text"])
 		love.graphics.setFont(font["default"])
-		love.graphics.drawf("You completed a level " .. self.stage .. "/80 ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
+		--love.graphics.drawf("You completed a level " .. self.stage .. "/80 ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
+		love.graphics.printf("You completed a level " .. self.stage .. "/80 ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
 		-- Buttons
 		self.button["new"]:draw()
 		self.button["quit"]:draw()
 	end
-	
 end
 
 function Game:update(dt)
@@ -521,7 +528,6 @@ function Game:update(dt)
 		local gx = math.floor((x - battlearea.left -17/2) / 17)
 		local gy = math.floor((y - battlearea.top -17/2 ) / 17)
 		
-
 		if(gy <= 30) then
 		self.gridpointer.x = gx
 		self.gridpointer.y = gy
@@ -627,7 +633,6 @@ function Game:update(dt)
 
 		self:switchStage(dt)
 		
-		
 		self.weapons:update(dt)
 		for n,e in pairs(self.enemys) do
 			if(e.health <=0 ) then
@@ -648,10 +653,9 @@ function Game:update(dt)
 			    table.remove(self.hints,o)
 			end
 		end
-		
 	end
-	
 end
+
 -- 切换关卡
 function Game:switchStage(dt)
 
@@ -679,8 +683,8 @@ function Game:switchStage(dt)
 		end
 	end
 	self.time = self.time - dt
-	
 end
+
 function Game:IsBlocked(from)
 	local isBlocked = true
 	local startIndex,endIndex
@@ -703,6 +707,7 @@ function Game:IsBlocked(from)
 
 	return isBlocked
 end
+
 function Game:mousepressed(x, y, button)
 	self.weapons:mousepressed(x, y, button)
 	
@@ -731,7 +736,12 @@ function Game:mousepressed(x, y, button)
 	-- 下一关 
 	if(x > 3 and x < 50 and y > 555 and y < 590) then
 	    self.time = 0
-	    local bonus = self.stages[self.stage].number
+		local bonus
+		if self.stages[self.stage] then
+			bonus = self.stages[self.stage].number
+		else
+			bonus = 15
+		end
 	    self.scope = self.scope + bonus
 		table.insert(self.hints,Hint.create("fadeout2","TIME BONUS!" .. bonus,300,550))
 	end
@@ -780,10 +790,7 @@ function Game:mousepressed(x, y, button)
 	
 			self.blockhouses[20*gy + gx	] = blockhouse
 			-- 设置地图位置为不可以通过
-	
-			
-	
-	
+
 			love.audio.play(sound["create_tower"])
 			self.money = self.money - tower_upgrade[i][1].buy_cost
 		end
@@ -808,7 +815,6 @@ function Game:mousepressed(x, y, button)
 			state = Menu.create()
 		end
 	end
-	
 end
 
 function Game:keypressed(key)
@@ -822,5 +828,4 @@ function Game:keypressed(key)
 			self.pause = true
 		end
 	end
-	
 end

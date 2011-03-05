@@ -8,6 +8,7 @@
 -- Handles buttons and such.
 -----------------------
 --require("vardump.lua")
+love.filesystem.require = require
 love.filesystem.require("lua/vardump.lua")
 
 Creature = {}
@@ -180,13 +181,15 @@ function Creature:draw()
 	if(self.freeze <=0) then
 
 			if self.hidden == true then
-			    local oldcolor = love.graphics.getColor()
+			    --local oldcolor = love.graphics.getColor()
+				local r, g, b, a = love.graphics.getColor()
 
 				love.graphics.setColorMode(love.color_modulate)
 				love.graphics.setColor(255, 255, 255, 100)
     			love.graphics.draw(graphics["creature"][self.number], self.x, self.y, self.angle)
-				love.graphics.setColor(oldcolor)
-				love.graphics.setColorMode(0)
+				--love.graphics.setColor(oldcolor)
+				love.graphics.setColor(r, g, b, a)
+				love.graphics.setColorMode(love.color_replace)
 			else
 				love.graphics.draw(graphics["creature"][self.number], self.x, self.y, self.angle)
 			end
@@ -197,7 +200,8 @@ function Creature:draw()
 		if self.hover and debug  then
    			love.graphics.setColor(color["menu_bg"])
 			love.graphics.setFont(font["small"])
-			love.graphics.draw("object move:"..self.startIndex .. "->" .. self.endIndex, 100, 223)
+			--love.graphics.draw("object move:"..self.startIndex .. "->" .. self.endIndex, 100, 223)
+			love.graphics.print("object move:"..self.startIndex .. "->" .. self.endIndex, 100, 223)
 		end
 	end
 	

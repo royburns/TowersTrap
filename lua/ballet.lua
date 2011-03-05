@@ -53,7 +53,6 @@ function Ballet:draw()
 			love.graphics.circle( love.draw_line, self.x, self.y, i ,255 )
 		end
 	end
-	
 end
 
 function Ballet:update(dt)

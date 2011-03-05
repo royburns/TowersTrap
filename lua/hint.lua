@@ -39,21 +39,21 @@ function Hint:draw()
 	if(self.type == "fly") then
 		love.graphics.setFont(font.impact_1)
 		love.graphics.setColor(0,0,0)
-		love.graphics.draw(self.text, self.x, self.y)
+		love.graphics.print(self.text, self.x, self.y)
 		love.graphics.setColor(255,255,0, self.alpha)
-		love.graphics.draw(self.text, self.x+1, self.y+1)
+		love.graphics.print(self.text, self.x+1, self.y+1)
 	elseif(self.type == "fadeout") then
 		love.graphics.setFont(font.impact_0)
     	love.graphics.setColor(229,127,211, self.alpha)
 		love.graphics.rectangle( love.draw_fill, self._x, self._y , 173, 43)
 		love.graphics.setColor(0,0,0, self.alpha)
-		love.graphics.drawf(self.text, self._x, self._y + self.height, 173, love.align_center)
+		love.graphics.printf(self.text, self._x, self._y + self.height, 173, love.align_center)
 	elseif(self.type == "fadeout2") then
 	    love.graphics.setFont(font.impact_1)
 		love.graphics.setColor(200,210,187, self.alpha)
 		love.graphics.rectangle( love.draw_fill, self._x, self._y , 173, 43)
 		love.graphics.setColor(0,0,0, self.alpha)
-		love.graphics.drawf(self.text, self._x, self._y + 30, 173, love.align_center)
+		love.graphics.printf(self.text, self._x, self._y + 30, 173, love.align_center)
 	end
 	
 end
