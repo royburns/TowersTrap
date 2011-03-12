@@ -1,5 +1,6 @@
 -- Instructions State
 -- Shows the instructions
+
 Instructions = {}
 Instructions.__index = Instructions
 
@@ -33,7 +34,6 @@ function Instructions:draw()
 	for n,b in pairs(self.button) do
 		b:draw()
 	end
-
 end
 
 function Instructions:update(dt)
@@ -41,7 +41,6 @@ function Instructions:update(dt)
 	for n,b in pairs(self.button) do
 		b:update(dt)
 	end
-	
 end
 
 function Instructions:mousepressed(x,y,button)
@@ -53,7 +52,6 @@ function Instructions:mousepressed(x,y,button)
 			end
 		end
 	end
-	
 end
 
 function Instructions:keypressed(key)
@@ -61,5 +59,4 @@ function Instructions:keypressed(key)
 	if key == love.key_escape then
 		state = Menu.create()
 	end
-	
 end

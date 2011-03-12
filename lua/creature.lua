@@ -14,7 +14,7 @@ love.filesystem.require("lua/vardump.lua")
 Creature = {}
 Creature.__index = Creature
 
-function Creature.create(game,number,gx,gy,live)
+function Creature.create(game, number, gx, gy, live)
 	
 	local temp = {}
 	setmetatable(temp, Creature)
@@ -28,15 +28,15 @@ function Creature.create(game,number,gx,gy,live)
 	temp.locked   = 0
 	temp.gx = gx
 	temp.gy = gy
-	temp.x = 17*gx + 17/2
-	temp.y = 17*gy + 17/2
+	temp.x = 17*gx + 17/2 + battlearea.left
+	temp.y = 17*gy + 17/2 + battlearea.top
 	temp.slowly = false -- 减速
 	temp.slowly_time = 0 -- 减速时间
 	temp.slowly_angle = 0
 	temp.hidden = false
 	temp.antihidden_time = 0 --破坏隐藏时间
  	temp.update_time = 1
-	temp.drawMap =  { n = KMapWidth *  KMapHeight }
+	temp.drawMap =  {n = KMapWidth *  KMapHeight}
 	temp.foundpath = false
 	temp.game = game
 	if(game~=nil) then 
@@ -58,7 +58,6 @@ function Creature.create(game,number,gx,gy,live)
 		temp.from = 1 -- left
 		temp.endIndex = (gy+1) * grid_col - 1 -- 475
 		temp.firstx = 66
-
 	else  -- from top
 		temp.angle = 90
 		temp.from = 0 -- top
@@ -67,7 +66,6 @@ function Creature.create(game,number,gx,gy,live)
 	end
 	
 	-- 初始化同目的地的坐标差
-
 	if(temp.from == 0) then --top
 		temp.endX = temp.x
     	temp.endY = battlearea.top + (temp.endIndex % grid_col )*17
@@ -78,8 +76,6 @@ function Creature.create(game,number,gx,gy,live)
 
     temp.dx = temp.endX - temp.x
 	temp.dy = temp.endY - temp.y
-
-
 
 	if(number == 0) then
 		temp.health = 8
@@ -132,28 +128,30 @@ function Creature.create(game,number,gx,gy,live)
 	temp.base_money = temp.money
 	temp.base_award = temp.award 
 	if( game.stage > 1) then
-	temp.health = temp.base_health * (0.5*game.stage)
-	temp.money =  math.floor(temp.base_money * (1 + math.log(game.stage) * 0.25 ))
-	temp.award =  math.floor(temp.base_award + math.log(game.stage))
+		temp.health = temp.base_health * (0.5*game.stage)
+		temp.money =  math.floor(temp.base_money * (1 + math.log(game.stage) * 0.25 ))
+		temp.award =  math.floor(temp.base_award + math.log(game.stage))
 	end
 				
 	temp.blood = temp.health 
 	
 	return temp
-	
 end
+
 function Creature:_x()
 	return battlearea.left + (gx) * 17
 end
+
 function Creature:_y()
 	return battlearea.top + (gy) * 17
 end
+
 function Creature:draw()
 	
 	local currentX = self.x
 	local currentY = self.y
 	love.graphics.setLine( 1 )
-    love.graphics.setLineStyle( love.line_smooth )
+    love.graphics.setLineStyle(love.line_smooth)
     love.graphics.setColor(color["grid_close"])
 	
 	if(debug) then
@@ -162,24 +160,21 @@ function Creature:draw()
 			for i = 1, #self.map do
 				nextX = self.map[i].iX * 17 + 17 /2
 				nextY = self.map[i].iY * 17 + 17 /2
-				love.graphics.line( currentX, currentY, nextX ,nextY )
+				love.graphics.line(currentX, currentY, nextX ,nextY)
 				currentX = nextX
 				currentY = nextY
 			end
-	
 		end
 	end
 	-- 画血条
 	local m = math.max(self.width,self.height)
 	love.graphics.setColor(color["blood"]) 
-	love.graphics.rectangle( love.draw_fill, self.x - m/2, self.y-m/2 - 5, m, 2 ) 
+	love.graphics.rectangle(love.draw_fill, self.x - m/2, self.y - m/2 - 5, m, 2) 
 	
 	love.graphics.setColor(color["green"]) 
-	love.graphics.rectangle( love.draw_fill, self.x-m/2, self.y-m/2 - 5, m*self.health/self.blood, 2 ) 
-	
+	love.graphics.rectangle(love.draw_fill, self.x - m/2, self.y - m/2 - 5, m*self.health/self.blood, 2) 
 	
 	if(self.freeze <=0) then
-
 			if self.hidden == true then
 			    --local oldcolor = love.graphics.getColor()
 				local r, g, b, a = love.graphics.getColor()
@@ -197,31 +192,28 @@ function Creature:draw()
 				love.graphics.draw(graphics["star_circle"], self.x, self.y, self.angle + self.slowly_angle)
 			end
 		-- 显示敌人状态
-		if self.hover and debug  then
+		if self.hover and debug then
    			love.graphics.setColor(color["menu_bg"])
 			love.graphics.setFont(font["small"])
 			--love.graphics.draw("object move:"..self.startIndex .. "->" .. self.endIndex, 100, 223)
-			love.graphics.print("object move:"..self.startIndex .. "->" .. self.endIndex, 100, 223)
+			love.graphics.print("object move:"..self.startIndex .. "->" .. self.endIndex, battlearea.left + 200, battlearea.top + 450)
 		end
 	end
-	
 end
+
 function Creature:MoveOnAir(dt)
     local speed = dt*self.speed * 10
     local dx = self.dx
 	local dy = self.dy
-	
 	
 	if(self.slowly) then
 	    speed = speed * 0.5
 	end
 	local angle = (270 + math.atan2(dy, dx)*180/math.pi)%360
 
-	
 	if(self.trace) then
-		print(string.format("self.angle = %d,angle = %d",self.angle,angle))
+		print(string.format("self.angle = %d,angle = %d", self.angle, angle))
 	end
-
 
 	if(self.off_angle ~= angle) then
 		self.off_angle = angle
@@ -233,20 +225,19 @@ function Creature:MoveOnAir(dt)
 		self.angle = self.off_angle - 90 * 3
 	end
 
-
 	--移动目标
-
     if(math.abs(dx)>speed or math.abs(dy)>speed) then
 		self.x = self.x - speed*math.sin(angle*math.pi/180)
 		self.y = self.y + speed*math.cos(angle*math.pi/180)
 	end
 end
+
 function Creature:ReCaleGridXY()
 	local gx = math.floor(self.x / 17)
 	local gy = math.floor(self.y / 17)
 	self.gx = gx
 	self.gy = gy
-	self.startIndex = gx + gy * grid_col
+	self.startIndex = (gx + gy * grid_col) % (KMapWidth * KMapHeight)
 end
 
 function Creature:MoveOnLand(dt)
@@ -267,7 +258,7 @@ function Creature:MoveOnLand(dt)
 		if (math.abs(nextX - self.x) + math.abs(nextY - self.y)) < 4 then
 			table.remove(self.map,1)
 			self:ReCaleGridXY()
-			self.startIndex = self.gx + self.gy * grid_col
+			self.startIndex = (self.gx + self.gy * grid_col) % (KMapWidth * KMapHeight)
 		end
 
 		--print(string.format("self.x=%d,self.y=%d,nextX=%d,nextY=%d",self.x,self.y,nextX,nextY))
@@ -279,7 +270,6 @@ function Creature:MoveOnLand(dt)
 				print(string.format("self.angle = %d,angle = %d",self.angle,angle))
 			end
 
-
 			if(self.off_angle ~= angle) then
 				self.off_angle = angle
 				return
@@ -290,15 +280,10 @@ function Creature:MoveOnLand(dt)
 				self.angle = self.off_angle - 90 * 3
 			end
 
-
 			--移动目标
-
-
-
 			if(math.abs(dx)>speed or math.abs(dy)>speed) then
 				self.x = self.x - speed*math.sin(angle*math.pi/180)
 				self.y = self.y + speed*math.cos(angle*math.pi/180)
-
 			end
 		end
 	 else -- direct move
@@ -308,11 +293,11 @@ function Creature:MoveOnLand(dt)
 		if self.from == 1 and self.x < self.firstx then -- from left
 		    self.x = self.x + speed
 		end
-	 end
+	end
 end
+
 function Creature:update(dt)
-	
-	
+
 	self.hover = false
 	
 	local x = love.mouse.getX()
@@ -361,11 +346,8 @@ function Creature:update(dt)
 	if (self.live ~= true) then
 		return
 	end
-	
-	
-	
+
 	-- 是否到达目标
-	
 	if  ((self.number == 6) and
 	     ((self.from == 0 and self.y > 546) or (self.from == 1 and self.x > 480))) or
 		self.startIndex == self.endIndex then --到达目标
@@ -389,9 +371,9 @@ function Creature:update(dt)
 			--pr (state.blockhouses,"state.blockhouses")
 
 			AStarInit();
-			local startIndex = self.startIndex
-			local endIndex = self.endIndex
-			AStarPathFind( startIndex , endIndex )
+			local startIndex = self.startIndex % (KMapWidth * KMapHeight)
+			local endIndex = self.endIndex % (KMapWidth * KMapHeight)
+			AStarPathFind(startIndex, endIndex)
 			--AStarDrawPath(self.endIndex)
 
 			local node = Map[endIndex]
@@ -418,30 +400,21 @@ function Creature:update(dt)
 			print("rebuild because #self.game.blockhouses changed!")
 		else
 		-- 检测路是否被毁坏
-
 			for i = 1, #self.map do
 				local index =  self.map[i].iIndex + 1   --当前路径
-
-
 				if self.game.maps[index] == 1 then
 					isNeedReBuildPath = true
 					break
 				end
-
-
-
 			end
 		end
 		if isNeedReBuildPath  then
 			for i = 1, #self.map do
 				table.remove(self.map,i)
 			end
-
 	  		self.foundpath = false
-
 		end
 	end
-	
 	
 	-- 朝出口移动
 	if(self.number == 6) then
@@ -461,5 +434,4 @@ function Creature:mousepressed(x, y, Creature)
 	end
 	
 	return false
-	
 end

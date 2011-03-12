@@ -7,9 +7,9 @@ var misslespeed:Number = 10;
 //角速度
 var omega:Number = 8;
 //添加处理事件
-stage.addEventListener(MouseEvent.MOUSE_MOVE,moveHandler);
-mcTarget.addEventListener(Event.ENTER_FRAME,targetMove);
-mcMissile.addEventListener(Event.ENTER_FRAME,missileTrack);
+stage.addEventListener(MouseEvent.MOUSE_MOVE, moveHandler);
+mcTarget.addEventListener(Event.ENTER_FRAME, targetMove);
+mcMissile.addEventListener(Event.ENTER_FRAME, missileTrack);
 //
 function moveHandler(e:MouseEvent):void{	
 	pos = new Point(e.localX,e.localY);

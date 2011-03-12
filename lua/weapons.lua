@@ -11,7 +11,7 @@
 Weapons = {}
 Weapons.__index = Weapons
 
-function Weapons.create(x,y)
+function Weapons.create(x, y)
 	
 	local temp = {}
 	setmetatable(temp, Weapons)
@@ -38,37 +38,37 @@ function Weapons:draw()
 		love.graphics.setLine(1)
 		love.graphics.rectangle( love.draw_fill, self._x, self._y , self.width, self.height) 
 		if(debug) then
-			love.graphics.print("weapons leave", 100, 120) 
+			love.graphics.print("weapons leave", battlearea.left + 100, battlearea.top + 120) 
 		end
 	else
 		if(debug) then
 		love.graphics.setColor(color["menu_bg"])
-		love.graphics.print("weapons hover", 100, 120) 
+		love.graphics.print("weapons hover", battlearea.left + 100, battlearea.top + 120) 
 		end
 	end
-	love.graphics.draw(graphics["weapons"], self.x , self.y)
+	love.graphics.draw(graphics["weapons"], self._x , self._y)
 	if(debug) then
 		love.graphics.setColor(color["menu_bg"])
-		love.graphics.print("weapons selected: " .. self.selected, 100, 100) 
+		love.graphics.print("weapons selected: " .. self.selected, battlearea.left + 100, battlearea.top + 100) 
 	end
 	if self.selected > 0 then
 		love.graphics.setColor(color["white"])
 		--love.graphics.setFont(font["large"])
 		love.graphics.setFont(font["impact"])
 		if self.selected == 1 then
-			love.graphics.print("SNIPER",197,589)
+			love.graphics.print("SNIPER", battlearea.left + 197, battlearea.top + 560)
 		elseif self.selected == 2 then
-			love.graphics.print("ROCKET LUNCHER",197,589)
+			love.graphics.print("ROCKET LUNCHER", battlearea.left + 197, battlearea.top + 560)
 		elseif self.selected == 3 then
-			love.graphics.print("CANNON",197,589)
+			love.graphics.print("CANNON", battlearea.left + 197, battlearea.top + 560)
 		elseif self.selected == 4 then
-			love.graphics.print("SHOCK",197,589)
+			love.graphics.print("SHOCK", battlearea.left + 197, battlearea.top + 560)
 		elseif self.selected == 5 then
-			love.graphics.print("AIR",197,589)
+			love.graphics.print("AIR", battlearea.left + 197, battlearea.top + 560)
 		elseif self.selected == 6 then
-			love.graphics.print("EARTHQUAKE",197,589)
+			love.graphics.print("EARTHQUAKE", battlearea.left + 197, battlearea.top + 560)
 		elseif self.selected == 7 then
-			love.graphics.print("RADAR",197,589)
+			love.graphics.print("RADAR", battlearea.left + 197, battlearea.top + 560)
 		end
 		
 		love.graphics.setColor(color["obj_selected"])
@@ -110,5 +110,5 @@ function Weapons:mousepressed(x, y, button)
 end
 
 function Weapons:unSelected()
-  self.selected = -1
+	self.selected = -1
 end

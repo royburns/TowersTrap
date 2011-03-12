@@ -29,7 +29,6 @@ function Ballet.create(type,host,x,y,target)
 	temp.host = host --子弹的宿主
 	temp.type = type -- 0 子弹,1 火箭，2 加农炮弹  3 减速弹 4 地对空导弹  5 地震 6 反隐形探测 
 	return temp
-	
 end
 
 function Ballet:draw()
@@ -37,7 +36,7 @@ function Ballet:draw()
 	if self.type == 0 then
 		--love.graphics.draw(graphics.rocket_fire, self.x, self.y)
 		love.graphics.setColor(color.black)
-		love.graphics.circle( love.draw_fill, self.x, self.y, 2,255 ) 
+		love.graphics.circle(love.draw_fill, self.x, self.y, 2, 255) 
 	elseif self.type == 1 then --rocket
 		love.graphics.draw(graphics.rocket_fire, self.x, self.y, self.angle + 90)
 	elseif self.type == 2 then -- cannon
@@ -47,10 +46,10 @@ function Ballet:draw()
 	elseif self.type == 4 then --aim
 		love.graphics.draw(graphics.sa12_fire, self.x, self.y, self.angle)
 	elseif self.type == 6 then --radar
-		love.graphics.setColor(182,204,87)
-		love.graphics.setLine( 1 )
+		love.graphics.setColor(182, 204, 87)
+		love.graphics.setLine(1)
 		for i = 3,self.off_angle,3 do
-			love.graphics.circle( love.draw_line, self.x, self.y, i ,255 )
+			love.graphics.circle(love.draw_line, self.x, self.y, i , 255)
 		end
 	end
 end
@@ -58,7 +57,6 @@ end
 function Ballet:update(dt)
 	
 	self.time = self.time + dt
-
 
 	--子弹移动
 	--pr(b,"ballet")
@@ -71,8 +69,8 @@ function Ballet:update(dt)
 	else
         self:gunTraceMove(dt)
 	end
-
 end
+
 function Ballet:radarMove(dt)
     local weapon = self.host.blockhouse.weapon
 	local level = self.host.blockhouse.level
@@ -83,6 +81,7 @@ function Ballet:radarMove(dt)
 	    self = nil
 	end
 end
+
 function Ballet:rocketMove(dt)
 
 	local weapon = self.host.blockhouse.weapon
@@ -109,7 +108,6 @@ function Ballet:rocketMove(dt)
 		self.targetY = self.target.y
 	end
 
-	
 	if(math.abs(dx)>speed or math.abs(dy)>speed) then
 		self.x = self.x - speed*math.sin(angle*math.pi/180)
 		self.y = self.y + speed*math.cos(angle*math.pi/180)
@@ -120,6 +118,7 @@ function Ballet:rocketMove(dt)
 	    self.live = 0 -- 命中目标
 	end
 end
+
 function Ballet:gunTraceMove(dt)
 
 	local weapon = self.host.blockhouse.weapon
@@ -141,6 +140,7 @@ function Ballet:gunTraceMove(dt)
 	    self.target.slowly_time = 60
 	end
 end
+
 function Ballet:aimTraceMove(dt)
 	local weapon = self.host.blockhouse.weapon
 	local level = self.host.blockhouse.level
@@ -168,7 +168,5 @@ function Ballet:aimTraceMove(dt)
 	
 	if self.target.x - self.x < 8 and self.target.y - self.y < 8 then
 	    self.live = 0 -- 命中目标
-
 	end
-
 end

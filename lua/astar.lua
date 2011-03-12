@@ -30,9 +30,9 @@ CMapNode =
 }
 
 -- 构造函数 --
-function CMapNode:new( aIndex )
-	if ( aIndex == nil ) then
-		error( " the Index Can't be nil " ) 
+function CMapNode:new(aIndex)
+	if (aIndex == nil) then
+		error(" the Index Can't be nil ") 
 	end
 
 	ret = object or {}
@@ -40,8 +40,10 @@ function CMapNode:new( aIndex )
 	setmetatable(ret, self)
 	
 	-- ######## Line too long (106 chars) ######## :
-	ret.iX = aIndex - math.floor( aIndex / KMapWidth) * KMapWidth  -- 求余、未知 % 为什么报错，数学库也打开了
-	ret.iY = ( aIndex - ret.iX ) / KMapWidth    -- Lua 得出的商是浮点数
+	--ret.iX = aIndex - math.floor(aIndex / KMapWidth) * KMapWidth  -- 求余、未知 % 为什么报错，数学库也打开了
+	--ret.iY = math.floor((aIndex - ret.iX) / KMapWidth)    -- Lua 得出的商是浮点数
+	ret.iX = math.floor(aIndex % KMapWidth)
+	ret.iY = math.floor(aIndex / KMapWidth)
 	ret.iIndex = aIndex
 	
 	return ret
@@ -56,7 +58,7 @@ function CMapNode:DrawChar()
 		if ( self.iIsInOpenList ) then
 			drawChar = "1 "
 		else 
-			drawChar = "◎ " 
+			drawChar = "◎ "
 		end
 	else 
 		drawChar = "■" 
@@ -66,12 +68,12 @@ function CMapNode:DrawChar()
 end
 
 -- 绘制表
-drawMap = { n = KMapWidth *  KMapHeight }
+drawMap = {n = KMapWidth *  KMapHeight}
 
 -- 初始化地图表 --
-Map = { n = KMapWidth *  KMapHeight }
+Map = {n = KMapWidth *  KMapHeight}
 for x = 0 , Map.n - 1 do
-	Map[x] = CMapNode:new( x )
+	Map[x] = CMapNode:new(x)
 end
 
 --[[地图表
@@ -80,10 +82,10 @@ end
 --绘制函数 --
 function Map:Draw()
 	local drawString = ""
-	for x = 0 , KMapWidth *  KMapHeight do
-		if ( self[x].iX == 0 ) then
-			print( "\n")
-			print( drawString )
+	for x = 0, KMapWidth * KMapHeight do
+		if (self[x].iX == 0) then
+			print("\n")
+			print(drawString)
 			drawString = ""
 		end -- end if
 
@@ -115,8 +117,8 @@ function NodeList:Clear()
 end
 
 -- 增加一个Node到列表 --
-function NodeList:AddNode( aMapNode )
-	if ( self.iRoot == nil ) then
+function NodeList:AddNode(aMapNode)
+	if (self.iRoot == nil) then
 		self.iRoot = aMapNode
 		return
 	end
@@ -124,10 +126,10 @@ function NodeList:AddNode( aMapNode )
 	-- 找出第一个 iFCost 比它大的Node，插在它的前面
 	local curNode = self.iRoot    -- 当前节点
 	local lastNode = nil          -- 前一节点
-	while ( curNode )  do
-		if ( curNode.iFCost >= aMapNode.iFCost ) then
+	while (curNode) do
+		if (curNode.iFCost >= aMapNode.iFCost) then
 			aMapNode.iNext = curNode
-			if( curNode == self.iRoot ) then 
+			if (curNode == self.iRoot) then 
 				self.iRoot = aMapNode
 			else 
 				lastNode.iNext = aMapNode  
@@ -142,16 +144,16 @@ function NodeList:AddNode( aMapNode )
 end
 
 -- 在列表中删除一个Node --
-function NodeList:DeleteNode( aMapNode )
+function NodeList:DeleteNode(aMapNode)
 	local curNode = self.iRoot    -- 当前节点
 	local lastNode = nil          -- 前一节点
 
-	while ( curNode ) do
-		if ( curNode == aMapNode ) then
-			if ( lastNode ) then 
+	while (curNode) do
+		if (curNode == aMapNode) then
+			if (lastNode) then 
 				lastNode.iNext = aMapNode.iNext 
 			end
-			if ( curNode == self.iRoot ) then 
+			if (curNode == self.iRoot) then 
 				self.iRoot = self.iRoot.iNext 
 			end
 			aMapNode.iNext = nil
@@ -205,41 +207,41 @@ function AStarInit()
 end
 
 -- 
-function AStarPathFind( aStartIndex, aEndIndex )
-	print(string.format("AStarPathFind(%d,%d)",aStartIndex,aEndIndex))
+function AStarPathFind(aStartIndex, aEndIndex)
+	print(string.format("AStarPathFind(%d,%d)", aStartIndex, aEndIndex))
 	
 	-- ######## Line too long (94 chars) ######## :
-	if ( aStartIndex < 0 and aStartIndex > Map.n ) then error( "StartIndex Out Off bound ")  end
+	if (aStartIndex < 0 and aStartIndex > Map.n) then error("StartIndex Out Off bound ")  end
 	-- ######## Line too long (88 chars) ######## :
-	if ( aEndIndex < 0 and aEndIndex > Map.n ) then error( "EndIndex Out Off bound ")  end
+	if (aEndIndex < 0 and aEndIndex > Map.n) then error("EndIndex Out Off bound ")  end
 
 	-- 首先把起始节点添加到开启列表
-	local H = HDistance( aStartIndex , aEndIndex )
+	local H = HDistance(aStartIndex, aEndIndex)
 	local G = 1
 	Map[aStartIndex].iFCost = H + G
 
-	openList:AddNode( Map[aStartIndex] )
+	openList:AddNode(Map[aStartIndex])
 
-	while ( true ) do
+	while (true) do
 		-- 取出openList中的F最少值
 		-- 并判断openList是否为空
 		leaseFNode = openList.iRoot
-		if ( leaseFNode == nil ) then break end
+		if (leaseFNode == nil) then break end
 
 		-- 从开放列表中移除该节点
-		openList:Remove( leaseFNode )
+		openList:Remove(leaseFNode)
 
 		-- 添加到关闭列表
-		closeList:Add( leaseFNode )
+		closeList:Add(leaseFNode)
 
 		-- 把该节点附近的节点添加到 开放列表
 		-- 并根据函数返回值判断是否已经找到路径
-		if ( AddNeighborToOpenList( leaseFNode, aEndIndex ) ) then break  end
+		if (AddNeighborToOpenList(leaseFNode, aEndIndex)) then break end
 	end -- end while
 end
 
 -- 获取H 估算值
-function HDistance( aStartIndex, aEndIndex )
+function HDistance(aStartIndex, aEndIndex)
 	local tmp1 = math.abs(Map[aStartIndex].iX - Map[aEndIndex].iX)
 	local tmp2 = math.abs(Map[aStartIndex].iY - Map[aEndIndex].iY)
 
@@ -254,7 +256,7 @@ end
 
 -- 把指定节点附近的节点添加到 开放列表
 -- 返回是否已经到达目标节点
-function AddNeighborToOpenList( aMapNode, aEndIndex )
+function AddNeighborToOpenList(aMapNode, aEndIndex)
 	ret = false   -- 返回值
 
 	local tmpNode = nil
@@ -262,10 +264,8 @@ function AddNeighborToOpenList( aMapNode, aEndIndex )
 
 	for aY = aMapNode.iY-1, aMapNode.iY+1  do
 		for aX = aMapNode.iX-1, aMapNode.iX+1  do
-
 			-- 边界检查
 			if ( aX >= 0 and aX < KMapWidth and aY >= 0 and aY < KMapHeight ) then
-
 				aIndex = aX + aY * KMapWidth
 				tmpNode = Map[aIndex]
 

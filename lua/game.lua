@@ -8,7 +8,11 @@ Game.__index = Game
 grid_col = 28
 grid_row = 32
 
-battlearea = {top = 0,left = 0}
+--battlearea = {top = 0,left = 0}
+battlearea = {
+	left = 0 ,--(love.graphics.getWidth() - graphics["battle_bg"]:getWidth()) / 2,
+	top = 0 --(love.graphics.getHeight() - graphics["battle_bg"]:getHeight()) / 2
+}
 
 size = 8
 
@@ -22,43 +26,55 @@ function Game.create()
 	setmetatable(temp, Game)
 	
 	math.randomseed(os.time()) -- randomize (for good measure)
+	
+	--[[ 
+	temp.x = 100
+	temp.y = 0
+	temp.width = love.graphics.getWidth( ) - 200
+	temp.height = love.graphics.getHeight( )
+	--]] 
+	temp.x = 0--(love.graphics.getWidth() - graphics["battle_bg"]:getWidth()) / 2
+	temp.y = 0--(love.graphics.getHeight() - graphics["battle_bg"]:getHeight()) / 2
+	temp.width = love.graphics.getWidth() -- 200
+	temp.height = love.graphics.getHeight()
 
 	--[[
   	地图表
 	]]
 	--temp.maps = {} -- 地图
-	temp.maps = {1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 -1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
-			 1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1
+	temp.maps = {
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1
 			}
 
 	for i = 0, grid_col * grid_row - 1 do
@@ -246,10 +262,10 @@ function Game.create()
 	--temp.time = 0 -- the time for this game
 	temp.win = -999 -- if the game is won and timer for fadein
 	temp.pause = false -- if the game is paused
-	temp.button = {	new = Button.create("New Game", 150, 400),
-					resume = Button.create("Resume", 160, 400),
-					quit = Button.create("Quit", 300, 400) }
-	temp.weapons = Weapons.create(335,617)
+	temp.button = {	new = Button.create("New Game", battlearea.left + 150, battlearea.top + 400),
+					resume = Button.create("Resume", battlearea.left + 160, battlearea.top + 400),
+					quit = Button.create("Quit", battlearea.left + 300, battlearea.top + 400) }
+	temp.weapons = Weapons.create(battlearea.left + 335, battlearea.top + 617)
 	return temp
 end
 
@@ -261,7 +277,12 @@ function Game:draw()
 	--draw 背景
 	--love.graphics.draw(graphics["battle_bg"], 480/2, 640/2)
 	--love.graphics.draw(graphics["battle_bg"], love.graphics.getWidth()/2, love.graphics.getHeight()/2)
-	love.graphics.draw(graphics["battle_bg"])
+	--print("self:x :"..self.x)
+	--print("self.y :"..self.y)
+	--love.timer.sleep(2000)
+	--battlearea.left = self.x
+	--battlearea.top = self.y
+	love.graphics.draw(graphics["battle_bg"], battlearea.left, battlearea.top)
 	
 	-- Draw the current FPS.
 	if(time_UpdateCapiton <=0) then
@@ -272,38 +293,38 @@ function Game:draw()
 		love.graphics.setFont(font["tiny"])
 		love.graphics.setColor(color["text"])	
 		--love.graphics.draw("mousepoint(x: " .. self.mousepointer.x .. ",y:" .. self.mousepointer.y,100, 180)
-		love.graphics.print("mousepoint(x: " .. self.mousepointer.x .. ",y:" .. self.mousepointer.y,100, 180)
+		love.graphics.print("mousepoint(x: " .. self.mousepointer.x .. ",y:" .. self.mousepointer.y..")", battlearea.left + 100, battlearea.top + 180)
 		--love.graphics.draw(string.format("gridpoint(x:%d,y:%d-%d)",self.gridpointer.x,self.gridpointer.y,self.gridpointer.y * grid_col + self.gridpointer.x),100, 200)
-		love.graphics.print(string.format("gridpoint(x:%d,y:%d-%d)",self.gridpointer.x,self.gridpointer.y,self.gridpointer.y * grid_col + self.gridpointer.x),100, 200)
+		love.graphics.print(string.format("gridpoint(x:%d,y:%d-%d)",self.gridpointer.x,self.gridpointer.y,self.gridpointer.y * grid_col + self.gridpointer.x), battlearea.left + 100, battlearea.top + 200)
 	
 		-- draw grid
-		love.graphics.setLine( 1 )
-	    love.graphics.setLineStyle( love.line_smooth )
+		love.graphics.setLine(1)
+	    love.graphics.setLineStyle(love.line_smooth)
+		
 		-- unit grid = 17*17
-	
-	    for i = 0, grid_row, 1 do	-- draw h line
-	
+	    for i = 0, grid_row - 1, 1 do	-- draw h line
 	        love.graphics.setColor(color["grid"])
-			love.graphics.line( battlearea.left, battlearea.top + i*17, battlearea.top + grid_col*17, battlearea.left + i*17 )
+			love.graphics.line(battlearea.left, battlearea.top + i * 17, battlearea.left + grid_col * 17, battlearea.top + i * 17)
 	        love.graphics.setColor(color["menu_text"])
-			--love.graphics.draw( i, battlearea.left + 5, battlearea.top + i*17 + 10  )
-			love.graphics.print( i, battlearea.left + 5, battlearea.top + i*17 + 10  )
+			--love.graphics.draw(i, battlearea.left + 5, battlearea.top + i*17 + 10 )
+			love.graphics.print(i, battlearea.left + 4, battlearea.top + i * 17 + 4)
 	    end
-	    for i = 0, grid_col, 1 do -- draw v line
+	    for i = 0, grid_col - 1, 1 do -- draw v line
 			love.graphics.setColor(color["grid"])
-			love.graphics.line( battlearea.left + i*17, battlearea.top, battlearea.left + i*17, battlearea.top + 17*grid_row)
+			love.graphics.line(battlearea.left + i * 17, battlearea.top, battlearea.left + i * 17, battlearea.top + 17 * grid_row)
 	        love.graphics.setColor(color["menu_text"])
-			--love.graphics.draw( i, battlearea.left + i*17 + 5, battlearea.top + 10  )
-			love.graphics.print( i, battlearea.left + i*17 + 5, battlearea.top + 10  )
+			--love.graphics.draw(i, battlearea.left + i*17 + 5, battlearea.top + 10)
+			love.graphics.print(i, battlearea.left + i * 17 + 4, battlearea.top + 4)
 	    end  
 	end
 	local selectWeapon = self:getSelectWepons()
+	
 	-- draw 预备放置方框
 	if (selectWeapon >=0) then
 		local gx = self.gridpointer.x
 		local gy = self.gridpointer.y
-		local cx = battlearea.top + gx *17
-		local cy = battlearea.left + gy * 17
+		local cx = battlearea.left + gx *17
+		local cy = battlearea.top + gy * 17
 		local i = self:getSelectWepons()
 			
 		love.graphics.setColor(color["grid_hover"])
@@ -313,76 +334,77 @@ function Game:draw()
 		if i >0 then
 			if self.money >= tower_upgrade[i][1].buy_cost and 
 			(self.maps[grid_col*gy + gx+1] == 0) and
-			(self.maps[grid_col*gy + gx +2] == 0)	and
+			(self.maps[grid_col*gy + gx +2] == 0) and
 			(self.maps[grid_col*(gy+1) + gx +1] == 0) and
 			(self.maps[grid_col*(gy+1) + gx+2] == 0) then
 				love.graphics.setColor(color["grid_open"])
 			else 
 				love.graphics.setColor(color["grid_close"])
 			end
-			love.graphics.rectangle( love.draw_fill, cx + 1, cy + 1 , 17*2 -2, 17*2 -2)
+			love.graphics.rectangle(love.draw_fill, cx + 1, cy + 1 , 17*2 -2, 17*2 -2)
 			love.graphics.setColor(color["shadow"])
 			local range = tower_upgrade[i][1].range;
-			love.graphics.circle( love.draw_fill, cx + 17, cy + 17, range*7,255 )
+			love.graphics.circle(love.draw_fill, cx + 17, cy + 17, range*7, 255)
 
    			-- 画选择的武器的性能
-
 			local damage  = tower_upgrade[i][1].damage
 			local buy_cost = tower_upgrade[i][1].buy_cost
 			local shoot_time = tower_upgrade[i][1].shoot_time
 
    			love.graphics.setColor(color["text"])
 			love.graphics.setFont(font["tiny"])
-			love.graphics.draw(graphics.power,74,570)
+			love.graphics.draw(graphics.power, battlearea.left + 74, battlearea.top + 570)
 			--love.graphics.draw(damage,94,570)
-			love.graphics.print(damage,94,570)
-			love.graphics.draw(graphics.coast,120,570)
+			love.graphics.print(damage, battlearea.left + 94, battlearea.top + 570)
+			love.graphics.draw(graphics.coast, battlearea.left + 120, battlearea.top + 570)
 			--love.graphics.draw(buy_cost,144,570)
-			love.graphics.print(buy_cost,144,570)
-			love.graphics.draw(graphics.update,74,604)
+			love.graphics.print(buy_cost, battlearea.left + 144, battlearea.top + 570)
+			love.graphics.draw(graphics.update, battlearea.left + 74, battlearea.top + 604)
 			--love.graphics.draw(shoot_time,94,604)
-			love.graphics.print(shoot_time,94,604)
+			love.graphics.print(shoot_time, battlearea.left + 94, battlearea.top + 604)
 		end
 	end
 	-- draw Time
+	--print("battlearea.left:"..battlearea.left)
+	--love.timer.sleep(2000)
 	love.graphics.setColor(color["text"])
 	love.graphics.setFont(font["medium"])
 	--love.graphics.draw(string.format("%d", self.time), 135, 522)
-	love.graphics.print(string.format("%d", self.time), 135, 522)
+	love.graphics.print(string.format("%d", self.time), battlearea.left + 135, battlearea.top + 522)
 	-- draw health
 	--love.graphics.draw(self.health, 350, 522)
-	love.graphics.print(self.health, 350, 522)
+	love.graphics.print(self.health, battlearea.left + 350, battlearea.top + 522)
 	-- draw money
 	--love.graphics.draw(self.money,115,50)
-	love.graphics.print(self.money,115,50)
+	love.graphics.print(self.money, battlearea.left + 115, battlearea.top + 50)
 	-- draw scope
 	--love.graphics.draw(self.scope,350,50)
-	love.graphics.print(self.scope,350,50)
+	love.graphics.print(self.scope, battlearea.left + 350, battlearea.top + 50)
 	-- draw stage level
     if(self.stage < #self.stages) then
 		--love.graphics.draw(self.stage,26,576)
-		love.graphics.print(self.stage,26,576)
+		love.graphics.print(self.stage, battlearea.left + 26, battlearea.top + 576)
 		
 		for i = 1,5 do
-		   local draw_stage = self.stage + i;
+			local draw_stage = self.stage + i;
 		   
-		   if(draw_stage > #self.stages) then
-		   	break
-		   end
+			if(draw_stage > #self.stages) then
+				break
+			end
 		    
-		   local creature_number = self.stages[draw_stage].creature + 1
+			local creature_number = self.stages[draw_stage].creature + 1
 
-		   if(draw_stage <= #self.stages) then
+			if(draw_stage <= #self.stages) then
 				--local oldcolor = love.graphics.getColor()
 				local r, g, b, a = love.graphics.getColor()
 				love.graphics.setColorMode(love.color_modulate)
 				love.graphics.setColor(255, 255, 255, 255 - 150 * i / 5)
-				love.graphics.draw(graphics["creature"][creature_number],14,566 - (i-1) * 30 )
+				love.graphics.draw(graphics["creature"][creature_number], battlearea.left + 14, battlearea.top + 566 - (i-1) * 30 )
 				--love.graphics.setColor(oldcolor)
 				love.graphics.setColor(r, g, b, a)
 				--love.graphics.setColorMode(0)
 				love.graphics.setColorMode(love.color_replace)
-		   end
+			end
 		end
 	end
 	-- draw weapons
@@ -422,22 +444,22 @@ function Game:draw()
 
 		love.graphics.setColor(color["text"])
 		love.graphics.setFont(font["tiny"])
-		love.graphics.draw(graphics.power,74,570)
+		love.graphics.draw(graphics.power, battlearea.left + 74, battlearea.top + 570)
 		--love.graphics.draw(damage,94,570)
-		love.graphics.print(damage,94,570)
+		love.graphics.print(damage, battlearea.left + 94, battlearea.top + 570)
 
-		love.graphics.draw(graphics.update,74,604)
+		love.graphics.draw(graphics.update, battlearea.left + 74, battlearea.top + 604)
 		--love.graphics.draw(shoot_time,94,604)
-		love.graphics.print(shoot_time,94,604)
+		love.graphics.print(shoot_time, battlearea.left + 94, battlearea.top + 604)
 
 		love.graphics.setColor(225,85,32)
 		if(damage_next~=nil) then
 			--love.graphics.draw(damage_next,144,570)
-			love.graphics.print(damage_next,144,570)
+			love.graphics.print(damage_next, battlearea.left + 144, battlearea.top + 570)
 		end
 		if(shoot_time_next ~= nil) then
 		    --love.graphics.draw(shoot_time_next,144,604)
-			love.graphics.print(shoot_time_next,144,604)
+			love.graphics.print(shoot_time_next, battlearea.left + 144, battlearea.top + 604)
 		end
 	end
 	--画选择的碉堡边框
@@ -449,29 +471,29 @@ function Game:draw()
 		-- You won!
 		if self.win > 0 then
 			love.graphics.setColor(255,255,255,235-(100*(self.win/0.5)))
-			love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
+			love.graphics.rectangle(love.draw_fill, battlearea.left + 0, battlearea.top + 0, love.graphics.getWidth(), love.graphics.getHeight())
 		else
 			love.graphics.setColor(color["overlay"])
-			love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
+			love.graphics.rectangle(love.draw_fill, battlearea.left + 0, battlearea.top + 0, love.graphics.getWidth(), love.graphics.getHeight())
 			love.graphics.setColor(color["main"])
 			love.graphics.setFont(font["huge"])
 			--love.graphics.drawf("CONGRATULATIONS", 0, 150, love.graphics.getWidth(), love.align_center)
-			love.graphics.printf("CONGRATULATIONS", 0, 150, love.graphics.getWidth(), love.align_center)
+			love.graphics.printf("CONGRATULATIONS", battlearea.left + 0, battlearea.top + 150, love.graphics.getWidth(), love.align_center)
 			love.graphics.setColor(color["text"])
 			love.graphics.setFont(font["default"])
 			--love.graphics.drawf("You completed a level " .. self.stage .. " ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
-			love.graphics.printf("You completed a level " .. self.stage .. " ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
+			love.graphics.printf("You completed a level " .. self.stage .. " ,Scope is: \n" .. self.scope, battlearea.left + 0, battlearea.top + 200, love.graphics.getWidth(), love.align_center)
 			-- Buttons
 			self.button["new"]:draw()
 			self.button["quit"]:draw()
 		end
 	elseif self.pause then
 		love.graphics.setColor(color["overlay"])
-		love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
+		love.graphics.rectangle(love.draw_fill, battlearea.left + 0, battlearea.top + 0,love.graphics.getWidth(),love.graphics.getHeight())
 		love.graphics.setColor(color["main"])
 		love.graphics.setFont(font["huge"])
 		--love.graphics.drawf("PAUSED", 0, 150, love.graphics.getWidth(), love.align_center)
-		love.graphics.printf("PAUSED", 0, 150, love.graphics.getWidth(), love.align_center)
+		love.graphics.printf("PAUSED", battlearea.left + 0, battlearea.top + 150, love.graphics.getWidth(), love.align_center)
 		love.graphics.setColor(color["text"])
 		love.graphics.setFont(font["default"])
 		-- Buttons
@@ -481,15 +503,15 @@ function Game:draw()
 	
 	if self.health <= 0 then
 		love.graphics.setColor(color["overlay"])
-		love.graphics.rectangle(love.draw_fill,0,0,love.graphics.getWidth(),love.graphics.getHeight())
+		love.graphics.rectangle(love.draw_fill, battlearea.left + 0, battlearea.top + 0,love.graphics.getWidth(),love.graphics.getHeight())
 		love.graphics.setColor(color["blood"])
 		love.graphics.setFont(font["huge"])
 		--love.graphics.drawf("YOU LOST", 0, 150, love.graphics.getWidth(), love.align_center)
-		love.graphics.printf("YOU LOST", 0, 150, love.graphics.getWidth(), love.align_center)
+		love.graphics.printf("YOU LOST", battlearea.left + 0, battlearea.top + 150, love.graphics.getWidth(), love.align_center)
 		love.graphics.setColor(color["text"])
 		love.graphics.setFont(font["default"])
 		--love.graphics.drawf("You completed a level " .. self.stage .. "/80 ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
-		love.graphics.printf("You completed a level " .. self.stage .. "/80 ,Scope is: \n" .. self.scope, 0, 200, love.graphics.getWidth(), love.align_center)
+		love.graphics.printf("You completed a level " .. self.stage .. "/80 ,Scope is: \n" .. self.scope, battlearea.left + 0, battlearea.top + 200, love.graphics.getWidth(), love.align_center)
 		-- Buttons
 		self.button["new"]:draw()
 		self.button["quit"]:draw()
@@ -520,7 +542,6 @@ function Game:update(dt)
 		self.button["new"]:update(dt)
 		self.button["quit"]:update(dt)
 	else -- 游戏中
-		
 		local x = love.mouse.getX()
 		local y = love.mouse.getY()
 		self.mousepointer.x = x
@@ -659,26 +680,31 @@ end
 -- 切换关卡
 function Game:switchStage(dt)
 
+	--print("battlearea.left:"..battlearea.left)
+	--love.timer.sleep(2000)
 	if self.time <= 0 then
-		
 		self.stage = self.stage + 1
 		self.time = self.stages[self.stage].time --时间
 		-- 敌人进入场景
 		if(self.stage >= 1 and self.stage <= #self.stages) then
 		
-			for i = 1,self.stages[self.stage].number /2 do
+			for i = 1,self.stages[self.stage].number / 2 do
 				local x = math.random(10,17)
 				local y = math.random(0,3)
-				local creature =  Creature.create(self, self.stages[self.stage].creature,x,y,true)
-    			table.insert(self.enemys,creature)
+				--local creature =  Creature.create(self, self.stages[self.stage].creature, battlearea.left + x, battlearea.top + y, true)
+				local creature =  Creature.create(self, self.stages[self.stage].creature, x, y, true)
+    			table.insert(self.enemys, creature)
 			
 			end
+			--[[ 
 			for i = 1,self.stages[self.stage].number / 2 do
 				local x = math.random(0,3)
 				local y = math.random(12,20)
-				local creature =  Creature.create(self, self.stages[self.stage].creature,x,y,true)
-				table.insert(self.enemys,creature)
+				--local creature =  Creature.create(self, self.stages[self.stage].creature, battlearea.left + x, battlearea.top + y, true)
+				local creature =  Creature.create(self, self.stages[self.stage].creature, x, y, true)
+				table.insert(self.enemys, creature)
 			end
+			--]] 
 			love.audio.play(sound["next_level"], 1)
 		end
 	end
@@ -687,7 +713,7 @@ end
 
 function Game:IsBlocked(from)
 	local isBlocked = true
-	local startIndex,endIndex
+	local startIndex, endIndex
 	AStarInit()
 	if(from == 1) then
 		startIndex = 422
@@ -697,7 +723,7 @@ function Game:IsBlocked(from)
 		endIndex = 796
 	end
 	
-	AStarPathFind( startIndex , endIndex )
+	AStarPathFind(startIndex, endIndex)
 	--AStarDrawPath(self.endIndex)
 
 	local node = Map[endIndex]
@@ -730,8 +756,8 @@ function Game:mousepressed(x, y, button)
 	local y = love.mouse.getY()
 	self.mousepointer.x = x
 	self.mousepointer.y = y
-	local gx = math.floor((x - battlearea.left -17/2) / 17)
-	local gy = math.floor((y - battlearea.top -17/2 ) / 17)
+	local gx = math.floor((x - battlearea.left - 17/2) / 17)
+	local gy = math.floor((y - battlearea.top - 17/2 ) / 17)
 	
 	-- 下一关 
 	if(x > 3 and x < 50 and y > 555 and y < 590) then
@@ -743,12 +769,12 @@ function Game:mousepressed(x, y, button)
 			bonus = 15
 		end
 	    self.scope = self.scope + bonus
-		table.insert(self.hints,Hint.create("fadeout2","TIME BONUS!" .. bonus,300,550))
+		table.insert(self.hints, Hint.create("fadeout2", "TIME BONUS!" .. bonus, 300, 550))
 	end
 	
 	-- 按home键 
 	if(x > 3 and x < 50 and y > 600 and y < 634) then
-		if self.win ~= -999 or self.health <=0 then
+		if self.win ~= -999 or self.health <= 0 then
 			state = Menu.create()
 		elseif self.pause then
 			self.pause = false
@@ -758,39 +784,40 @@ function Game:mousepressed(x, y, button)
 	end 
 	local i = self:getSelectWepons()
 	if i >= 0 and self.money >= tower_upgrade[i][1].buy_cost and 
-			(self.maps[grid_col*gy + gx+1] == 0) and
-			(self.maps[grid_col*gy + gx +2] == 0)	and
-			(self.maps[grid_col*(gy+1) + gx +1] == 0) and
-			(self.maps[grid_col*(gy+1) + gx+2] == 0) then
-		-- 增加一个碉堡
-		Map[grid_col*gy + gx ].iCanPass = false
-		Map[grid_col*gy + gx + 1].iCanPass = false
-		Map[grid_col*(gy+1) + gx ].iCanPass = false
-		Map[grid_col*(gy+1) + gx + 1].iCanPass = false
+			(self.maps[grid_col * gy + gx + 1] == 0) and
+			(self.maps[grid_col * gy + gx + 2] == 0) and
+			(self.maps[grid_col * (gy + 1) + gx + 1] == 0) and
+			(self.maps[grid_col * (gy + 1) + gx + 2] == 0) then
 		
-		self.maps[grid_col*gy + gx + 1] = 1
-		self.maps[grid_col*gy + gx + 2] = 1
-		self.maps[grid_col*(gy+1) + gx + 1] = 1
-		self.maps[grid_col*(gy+1) + gx + 2] = 1
+		-- 增加一个碉堡
+		Map[grid_col * gy + gx ].iCanPass = false
+		Map[grid_col * gy + gx + 1].iCanPass = false
+		Map[grid_col * (gy + 1) + gx ].iCanPass = false
+		Map[grid_col * (gy + 1) + gx + 1].iCanPass = false
+		
+		self.maps[grid_col * gy + gx + 1] = 1
+		self.maps[grid_col * gy + gx + 2] = 1
+		self.maps[grid_col * (gy + 1) + gx + 1] = 1
+		self.maps[grid_col * (gy + 1) + gx + 2] = 1
 		
 		if(self:IsBlocked(0) or self:IsBlocked(1)) then
-			Map[grid_col*gy + gx ].iCanPass = true
-			Map[grid_col*gy + gx + 1].iCanPass = true
-			Map[grid_col*(gy+1) + gx ].iCanPass = true
-			Map[grid_col*(gy+1) + gx + 1].iCanPass = true
+			Map[grid_col * gy + gx ].iCanPass = true
+			Map[grid_col * gy + gx + 1].iCanPass = true
+			Map[grid_col * (gy + 1) + gx ].iCanPass = true
+			Map[grid_col * (gy + 1) + gx + 1].iCanPass = true
 			
-			self.maps[grid_col*gy + gx + 1] = 0
-			self.maps[grid_col*gy + gx + 2] = 0
-			self.maps[grid_col*(gy+1) + gx + 1] = 0
-			self.maps[grid_col*(gy+1) + gx + 2] = 0
+			self.maps[grid_col * gy + gx + 1] = 0
+			self.maps[grid_col * gy + gx + 2] = 0
+			self.maps[grid_col * (gy + 1) + gx + 1] = 0
+			self.maps[grid_col * (gy + 1) + gx + 2] = 0
 			
-			table.insert(self.hints,Hint.create("fadeout","BLOCK!",300,550))
+			table.insert(self.hints, Hint.create("fadeout", "BLOCK!", 300, 550))
 		else
-			local blockhouse = Blockhouse.create(i,self.gridpointer)
+			local blockhouse = Blockhouse.create(i, self.gridpointer)
 	
-			self.blockhouses[20*gy + gx	] = blockhouse
+			self.blockhouses[20 * gy + gx] = blockhouse
+			
 			-- 设置地图位置为不可以通过
-
 			love.audio.play(sound["create_tower"])
 			self.money = self.money - tower_upgrade[i][1].buy_cost
 		end
@@ -819,7 +846,8 @@ end
 
 function Game:keypressed(key)
 	
-	if key == love.key_escape then
+	--if key == love.key_escape then
+	if key == "escape" then
 		if self.win ~= -999 or self.health <=0 then
 			state = Menu.create()
 		elseif self.pause then
@@ -827,5 +855,8 @@ function Game:keypressed(key)
 		else
 			self.pause = true
 		end
+	end
+	if key == "f1" then
+		self.weapons:unSelected()
 	end
 end

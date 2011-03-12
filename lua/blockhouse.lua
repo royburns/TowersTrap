@@ -11,7 +11,7 @@
 Blockhouse = {}
 Blockhouse.__index = Blockhouse
 
-function Blockhouse.create(weapon,mapgridpointer)
+function Blockhouse.create(weapon, mapgridpointer)
 	lastselected = nil
 	local temp = {}
 	setmetatable(temp, Blockhouse)
@@ -45,7 +45,7 @@ function Blockhouse.create(weapon,mapgridpointer)
 	if(weapon == 5) then -- air
 		temp.buildangle = 720
 	else
-		temp.angle = math.random(0,360)
+		temp.angle = math.random(0, 360)
 	end
 	
 	if(weapon == 6) then -- earthquacke
@@ -54,56 +54,53 @@ function Blockhouse.create(weapon,mapgridpointer)
 	    temp.earthquake_action_r = 0
 	end
 	
-
 	temp.width = graphics["blockhous"][weapon]:getWidth()
 	temp.height = graphics["blockhous"][weapon]:getHeight()
 	temp._x = battlearea.left + (mapgridpointer.x) * 17
 	temp._y = battlearea.top + (mapgridpointer.y) * 17
 	temp.x = battlearea.left + (mapgridpointer.x + 1) * 17
-	temp.y = battlearea.top + (mapgridpointer.y+1) * 17
+	temp.y = battlearea.top + (mapgridpointer.y + 1) * 17
 	temp.gridpointer = {}
 	temp.gridpointer.x = mapgridpointer.x
 	temp.gridpointer.y = mapgridpointer.y
 
-	pr(temp.gun,"create blockhouse")
+	pr(temp.gun, "create blockhouse")
 	return temp
-	
 end
 
 function Blockhouse:draw()
 	local i = self.weapon
 	local gridpointer = self.gridpointer
-	love.graphics.draw(graphics["blockhous"][i],self.x,self.y,self.angle)
+	self.angle = 0
+	love.graphics.draw(graphics["blockhous"][i], self._x, self._y, self.angle)
 	if self.ice then
-	    love.graphics.setColor(255,255,255,200)
-     	love.graphics.rectangle( love.draw_fill, self._x,self._y,34,34)
-     	love.graphics.draw(graphics["bh_border_ice"],self.x,self.y)
+	    love.graphics.setColor(255, 255, 255, 200)
+     	love.graphics.rectangle(love.draw_fill, self._x, self._y, 34, 34)
+     	love.graphics.draw(graphics["bh_border_ice"], self._x, self._y)
 	else
-		love.graphics.draw(graphics["bh_border"],self.x,self.y)
+		love.graphics.draw(graphics["bh_border"], self._x, self._y)
 	end
 
-	
-	if (self.weapon == 6) and self.earthquake_action_r>0 then
+	if (self.weapon == 6) and self.earthquake_action_r > 0 then
 		love.graphics.setColor(color["shadow"])
-		love.graphics.circle( love.draw_fill, self.x, self.y, self.earthquake_action_r*7,255 )
+		love.graphics.circle(love.draw_fill, self.x, self.y, self.earthquake_action_r * 7, 255)
 	end
 	
-
 	local s = ""
 	local h = ""
 	if(self.hover) then
-	h = "hover"
+		h = "hover"
 	else
-	h = "leave"
+		h = "leave"
 	end
 	if(self.selected) then
-	s = "selected"
+		s = "selected"
 	else
-	s ="unsel"
+		s = "unsel"
 	end
 
 	-- »­µï±¤ÐÅÏ¢ 
-	if self.hover and debug  then
+	if self.hover and debug then
 		love.graphics.setFont(font["tiny"])
  		love.graphics.setColor(color["text"])
 		--love.graphics.draw(string.format("x=%d,y=%d,w=%d,h=%d,s=%s,m=%s",self._x,self._y,self.width,self.height,s,h),self._x,self._y)
@@ -118,7 +115,7 @@ function Blockhouse:drawselector()
 		local range = tower_upgrade[weapon][level].range*7
 		love.graphics.setColor(color["green_ol"])
 
-		love.graphics.circle( love.draw_fill, self.x, self.y, range,255 )
+		love.graphics.circle(love.draw_fill, self.x, self.y, range, 255)
 
 		-- draw upgrade rectangle
 		love.graphics.setLine( 1 )
@@ -180,8 +177,6 @@ function Blockhouse:update(dt)
 	    self.hover_down = true
 	end
 	
-	
-	
 	if(self.buildangle > 0 ) then
    		self.angle = self.buildangle - 3000* dt
    		self.buildangle = self.angle
@@ -197,16 +192,13 @@ function Blockhouse:update(dt)
 		return
 	end
 
-
 	if(self.earthquake_action_r > 0) then
 	    self.earthquake_action_r = self.earthquake_action_r - 12* dt
 	end
 
-
 	if(self.gun ~=nil) then
 		self.gun:update(dt)
 	end
-	
 end
 
 function Blockhouse:mousepressed(x, y, button)
@@ -231,6 +223,6 @@ function Blockhouse:mousepressed(x, y, button)
 	    state.gselectedBlockhouse = nil
      	return false
 	end
-	return true
 	
+	return true
 end

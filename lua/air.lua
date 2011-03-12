@@ -20,7 +20,6 @@ function Air.create(blockhouse)
 	temp.blockhouse  = blockhouse
 
 	return temp
-	
 end
 
 function Air:update(dt)
@@ -30,7 +29,6 @@ function Air:update(dt)
 	else
         self:FindTargetsAndFire()
 	end
-
 end
 
 function Air:getShoot_time()

@@ -20,7 +20,6 @@ function EarthQuake.create(blockhouse)
 	temp.blockhouse  = blockhouse
 
 	return temp
-	
 end
 
 function EarthQuake:update(dt)
@@ -60,15 +59,11 @@ function EarthQuake:update(dt)
    			-- ¼ÆËãËğÉË 
   		end
 
-
 		local e = self.target
 		if(math.abs(e.x - self.blockhouse.x) > range or math.abs(e.y - self.blockhouse.y) > range) then
 		    self.target = nil
 		    e.locked = e.locked - 1
 		end
-		
-
 	end
-	
 end
 

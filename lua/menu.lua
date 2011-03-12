@@ -1,8 +1,8 @@
 -- Menu State
 -- Main menu...
+
 Menu = {}
 Menu.__index = Menu
-
 
 function Menu.create()
 	local temp = {}
@@ -11,18 +11,19 @@ function Menu.create()
 					instructions = Button.create("Instructions", love.graphics.getWidth( ) /2, 250),
 					options = Button.create("Options", love.graphics.getWidth( ) /2, 300),
 					quit = Button.create("Quit", love.graphics.getWidth( ) /2, 500) }
+	
 	return temp
 end
 
 function Menu:draw()
 	--love.graphics.draw(graphics["logo"], love.graphics.getWidth()/2 , love.graphics.getHeight()/2 )
-	love.graphics.draw(graphics["logo"], 100, 0)
+	love.graphics.draw(graphics["logo"], 0, 0, 0, love.graphics.getWidth() / graphics["logo"]:getWidth(), love.graphics.getHeight() / graphics["logo"]:getHeight())
 	love.graphics.setColor(color["menu_border"])
 	love.graphics.setLine(4, love.line_rough)
-	love.graphics.rectangle( love.draw_line, 100, 0, love.graphics.getWidth( ) -200,  love.graphics.getHeight( ) ) 
+	love.graphics.rectangle(love.draw_line, 0, 0, love.graphics.getWidth(), love.graphics.getHeight()) 
 	love.graphics.setColor(color["menu_bg"])
 	love.graphics.setLine(1, love.line_smooth)
-	love.graphics.rectangle( love.draw_fill, 102, 2, love.graphics.getWidth( ) -204,  love.graphics.getHeight( )-4 ) 
+	love.graphics.rectangle(love.draw_fill, 2, 2, love.graphics.getWidth() - 4, love.graphics.getHeight() - 4) 
 	
 	for n,b in pairs(self.button) do
 		b:draw()

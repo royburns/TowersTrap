@@ -32,7 +32,6 @@ function Rocket:draw()
 	if self.hover then love.graphics.setColor(color["main"])
 	else love.graphics.setColor(color["menu_text"]) end
 	love.graphics.print(self.text, self.x, self.y)
-	
 end
 
 function Rocket:update(dt)
@@ -49,7 +48,6 @@ function Rocket:update(dt)
 		self.shoot_time = self.shoot_time - 10 * dt
 	end
 
-	
 	if (self.target == nil) then --获取一个target
 
 		for i,e in pairs(state.enemys) do
@@ -89,9 +87,7 @@ function Rocket:update(dt)
       		self.shoot_time = shoot_time
    			table.insert(state.ballets , Ballet.create(1, self,self.blockhouse.x ,self.blockhouse.y ,self.target))
 		end
-
 	end
-	
 end
 
 function Rocket:mousepressed(x, y, button)
@@ -104,5 +100,4 @@ function Rocket:mousepressed(x, y, button)
 	end
 	
 	return false
-	
 end
