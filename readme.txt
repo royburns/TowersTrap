@@ -1,5 +1,5 @@
-1.下载游戏引擎love2d
-http://www.love2d.org/download
-2.运行r.bat
-  "C:\Program Files\LOVE\love.exe" "C:\Program Files\LOVE\demos\TowersTrap"
+1.download the 2d game engine 'love2d'
+url: http://www.love2d.org/download
+2. run 'r.bat'
+content: "C:\Program Files\LOVE\love.exe" "C:\Program Files\LOVE\demos\TowersTrap"
 
