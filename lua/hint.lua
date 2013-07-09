@@ -11,7 +11,7 @@
 Hint = {}
 Hint.__index = Hint
 
-function Hint.create(type,text,x,y)
+function Hint.create(type,text,x,y) 
 	
 	local temp = {}
 	setmetatable(temp, Hint)
